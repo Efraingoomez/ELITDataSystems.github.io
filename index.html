@@ -1,452 +1,685 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Efraín Gómez - Data & AI Infrastructure. Consultoría de alto nivel para escalar negocios mediante datos.">
-    <meta name="theme-color" content="#050505">
-    <meta property="og:title" content="Efraín Gómez | Data Authority">
-    <meta property="og:type" content="website">
-    
+    <meta name="description" content="Efraín Gómez - Data Authority. Data Engineering & Strategy.">
+    <meta name="theme-color" content="#000000">
     <title>Efraín Gómez | Data Authority</title>
     
-    <!-- Fuentes: 'Manrope' para legibilidad técnica, 'Syncopate' para autoridad futurista -->
+    <!-- Fuentes Premium -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
 
     <style>
-        /* --- ELITE DESIGN TOKENS --- */
+        /* --- SYSTEM 2030 TOKENS --- */
         :root {
-            --bg-master: #050505; /* Negro absoluto */
-            --bg-panel: #0F0F0F; /* Gris carbón muy oscuro */
-            --bg-panel-hover: #141414;
+            --bg-deep: #030303;
+            --glass-surface: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-highlight: rgba(255, 255, 255, 0.15);
             
-            --border-subtle: rgba(255, 255, 255, 0.08);
-            --border-focus: rgba(255, 255, 255, 0.4);
-
-            --text-primary: #F0F0F0; /* Blanco roto premium */
-            --text-secondary: #888888; /* Gris medio para jerarquía */
-            --accent-electric: #3B82F6; /* Azul eléctrico sutil */
-
-            --font-display: 'Syncopate', sans-serif;
-            --font-body: 'Manrope', sans-serif;
+            --text-luminous: #FFFFFF;
+            --text-dim: rgba(255, 255, 255, 0.6);
             
-            --grid-gap: 20px;
+            --accent-glow: 0 0 40px rgba(50, 150, 255, 0.15);
+            --accent-blue: #3b82f6;
+            
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'Space Grotesk', monospace;
+            
+            --ease-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* --- RESET & BASE --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
-        html { scroll-behavior: smooth; }
-
         body {
-            background-color: var(--bg-master);
-            color: var(--text-primary);
-            font-family: var(--font-body);
+            background-color: var(--bg-deep);
+            color: var(--text-luminous);
+            font-family: var(--font-sans);
             min-height: 100vh;
             overflow-x: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
-            line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
+            background-image: radial-gradient(circle at 50% 0%, #111 0%, #000 60%);
         }
 
-        /* --- MICRO-TEXTURE (NOISE) --- */
-        .noise {
+        /* --- UI COMPONENTS --- */
+        
+        /* Navbar con Language Switch */
+        nav {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
-            pointer-events: none;
-            z-index: 50;
-        }
-
-        /* --- HEADER (MINIMALIST) --- */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 24px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            top: 24px;
+            padding: 8px 12px 8px 24px;
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
             z-index: 100;
-            background: rgba(5, 5, 5, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .brand {
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: 1rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--text-primary);
-            text-decoration: none;
-        }
-
-        .contact-pill {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--bg-master);
-            background: var(--text-primary);
-            padding: 10px 24px;
-            border-radius: 2px; /* Bordes casi rectos, estética brutalista/Swiss */
-            text-decoration: none;
+            display: flex;
+            gap: 24px;
+            align-items: center;
             transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
         }
 
-        .contact-pill:hover {
-            background: var(--accent-electric);
-            color: #fff;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+        nav:hover {
+            border-color: var(--glass-highlight);
+            box-shadow: 0 0 20px rgba(255,255,255,0.05);
         }
 
-        /* --- HERO SECTION (TYPOGRAPHIC POWER) --- */
+        .nav-brand { color: #fff; font-weight: 600; padding-right: 12px; border-right: 1px solid var(--glass-border); }
+        
+        .nav-link {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+        .nav-link:hover { color: var(--text-luminous); }
+
+        /* Language Toggle Switch */
+        .lang-switch {
+            display: flex;
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 2px;
+            margin-left: 10px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-dim);
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn.active {
+            background: var(--text-luminous);
+            color: #000;
+        }
+
+        /* Contenedor Principal */
         main {
             width: 100%;
-            max-width: 1400px;
-            padding: 180px 40px 100px;
+            max-width: 1200px;
+            padding: 160px 24px 100px;
             display: flex;
             flex-direction: column;
+            gap: 160px;
         }
 
-        .hero-section {
-            margin-bottom: 120px;
-            border-left: 1px solid var(--border-subtle);
-            padding-left: 40px;
+        /* --- HERO --- */
+        .hero {
+            text-align: center;
+            position: relative;
         }
 
         h1 {
-            font-family: var(--font-body); /* Usamos Manrope para el título principal para legibilidad masiva */
+            font-size: clamp(3.5rem, 8vw, 7.5rem);
             font-weight: 600;
-            font-size: clamp(3rem, 7vw, 7rem);
-            line-height: 1;
+            line-height: 0.95;
             letter-spacing: -0.04em;
-            color: var(--text-primary);
-            margin-bottom: 2rem;
-            max-width: 1200px;
+            background: linear-gradient(180deg, #fff 0%, #888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 32px;
         }
 
-        h1 span {
-            color: var(--text-secondary); /* Contraste sutil en lugar de gradiente arcoiris */
-        }
-
-        .hero-sub {
-            font-size: clamp(1.1rem, 2vw, 1.5rem);
-            color: var(--text-secondary);
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-dim);
+            font-weight: 300;
             max-width: 600px;
-            font-weight: 300;
-            margin-bottom: 3rem;
-        }
-
-        .status-indicator {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-family: var(--font-display);
-            font-size: 0.7rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--accent-electric);
-            margin-bottom: 20px;
-        }
-
-        .status-dot {
-            width: 6px; height: 6px;
-            background: var(--accent-electric);
-            box-shadow: 0 0 10px var(--accent-electric);
-        }
-
-        /* --- BENTO GRID SYSTEM (SWISS STYLE) --- */
-        .section-label {
-            font-family: var(--font-display);
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            margin-bottom: 40px;
-            display: block;
-            padding-left: 40px; /* Alineación con el borde del hero */
-        }
-
-        .bento-container {
-            display: grid;
-            grid-template-columns: repeat(1, 1fr);
-            gap: var(--grid-gap);
-            width: 100%;
-        }
-
-        /* Desktop Grid Logic */
-        @media (min-width: 1024px) {
-            .bento-container {
-                grid-template-columns: repeat(4, 1fr);
-                grid-template-rows: repeat(3, minmax(280px, auto));
-            }
-            
-            /* Clases de utilidad para el grid */
-            .col-span-2 { grid-column: span 2; }
-            .col-span-3 { grid-column: span 3; }
-            .row-span-2 { grid-row: span 2; }
-        }
-
-        .card {
-            background: var(--bg-panel);
-            border: 1px solid var(--border-subtle);
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card:hover {
-            border-color: var(--border-focus);
-            background: var(--bg-panel-hover);
-            transform: translateY(-2px);
-        }
-
-        /* Tipografía de las tarjetas */
-        .card h3 {
-            font-family: var(--font-body);
-            font-size: 1.5rem;
-            font-weight: 400; /* Thin is luxury */
-            letter-spacing: -0.02em;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .card p {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            font-weight: 300;
+            margin: 0 auto;
             line-height: 1.6;
         }
 
-        .card-num {
-            font-family: var(--font-display);
-            font-size: 0.7rem;
-            color: var(--border-focus);
-            margin-bottom: 20px;
-            display: block;
+        /* --- SERVICES GRID --- */
+        .section-header {
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .section-title { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--text-dim); }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
         }
 
-        /* Highlight sutil para tarjetas clave */
-        .card.featured::before {
+        .glass-card {
+            background: var(--glass-surface);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s var(--ease-elastic);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 400px;
+        }
+
+        .glass-card::before {
             content: '';
             position: absolute;
-            top: 0; right: 0;
-            width: 100px; height: 100px;
-            background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.15), transparent 70%);
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.06), transparent 40%);
+            opacity: 0;
+            transition: opacity 0.5s;
             pointer-events: none;
+            z-index: 1;
         }
 
-        /* --- AUTHORITY FOOTER --- */
-        .authority-block {
-            margin-top: 20px;
-            background: #0A0A0A;
-            border: 1px solid var(--border-subtle);
-            padding: 40px;
+        .glass-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: rgba(255,255,255,0.2);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
+        }
+        .glass-card:hover::before { opacity: 1; }
+
+        .card-num {
+            font-family: var(--font-mono);
+            font-size: 4rem;
+            color: rgba(255,255,255,0.03);
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-weight: 300;
+        }
+
+        .card-icon {
+            width: 48px; height: 48px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 20px;
+            justify-content: center;
+            margin-bottom: 32px;
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .authority-text {
-            max-width: 60%;
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .card-desc {
+            color: var(--text-dim);
+            font-size: 1rem;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .feature-tags {
+            margin-top: 32px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .tag {
+            font-size: 0.75rem;
+            padding: 6px 12px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            color: var(--text-dim);
+        }
+
+        /* --- THE ARCHIVE (INVITING CTA) --- */
+        .archive-box {
+            background: linear-gradient(135deg, #0a0a0a 0%, #000 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
         
-        .authority-text strong { color: var(--text-primary); display: block; margin-bottom: 5px;}
-        .authority-text span { color: var(--text-secondary); font-size: 0.9rem; }
-
-        .link-arrow {
-            color: var(--text-primary);
+        /* Subtle glow background for Archive */
+        .archive-box::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 60%; height: 60%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05), transparent 70%);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+        
+        .archive-btn {
+            margin-top: 40px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 40px;
+            background: var(--text-luminous);
+            color: #000;
+            border-radius: 100px;
             text-decoration: none;
-            font-family: var(--font-display);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            border-bottom: 1px solid var(--border-subtle);
-            padding-bottom: 5px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            z-index: 2;
+        }
+        .archive-btn:hover { 
+            transform: scale(1.05); 
+            box-shadow: 0 0 30px rgba(255,255,255,0.3);
+        }
+
+        /* --- CREDENTIALS --- */
+        .cred-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .cred-pill {
+            display: flex;
+            flex-direction: column;
+            padding: 24px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
             transition: 0.3s;
         }
         
-        .link-arrow:hover { border-color: var(--text-primary); }
+        .cred-pill:hover {
+            background: rgba(255,255,255,0.04);
+            border-color: var(--glass-highlight);
+        }
+
+        .cred-role { font-size: 0.95rem; color: #fff; margin-bottom: 4px; font-weight: 500;}
+        .cred-issuer { font-size: 0.85rem; color: var(--text-dim); }
+        .cred-type { 
+            font-family: var(--font-mono); 
+            font-size: 0.7rem; 
+            color: var(--accent-blue); 
+            margin-top: 16px; 
+            text-transform: uppercase;
+        }
 
         footer {
-            padding: 60px 40px;
-            border-top: 1px solid var(--border-subtle);
-            margin-top: 80px;
-            color: var(--text-secondary);
+            border-top: 1px solid var(--glass-border);
+            padding: 40px;
+            text-align: center;
+            color: var(--text-dim);
             font-size: 0.8rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
 
-        /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
-            header { padding: 20px; }
-            main { padding: 120px 20px 60px; }
-            .hero-section { padding-left: 0; border: none; margin-bottom: 60px; }
-            .section-label { padding-left: 0; }
-            .card { padding: 30px; min-height: 250px; }
-            .authority-block { flex-direction: column; align-items: flex-start; }
-            .authority-text { max-width: 100%; }
-        }
     </style>
 </head>
 <body>
 
-    <div class="noise"></div>
-
-    <header>
-        <a href="#" class="brand">Efraín Gómez</a>
-        <a href="mailto:contacto@efraingomez.com" class="contact-pill">Contratar Consultoría</a>
-    </header>
+    <nav>
+        <span class="nav-brand">Efraín Gómez</span>
+        <a href="#soluciones" class="nav-link" data-key="nav_solutions">Solutions</a>
+        <a href="#archivo" class="nav-link" data-key="nav_archive">Archive</a>
+        <a href="mailto:contacto@efraingomez.com" class="nav-link" style="color: #fff;" data-key="nav_contact">Contact →</a>
+        
+        <div class="lang-switch">
+            <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
+            <button class="lang-btn" onclick="setLanguage('es')">ES</button>
+        </div>
+    </nav>
 
     <main>
-        
-        <!-- HERO SECTION -->
-        <section class="hero-section">
-            <div class="status-indicator">
-                <div class="status-dot"></div>
-                Sistemas Operativos
-            </div>
-            
-            <h1>
-                Turn Data Chaos<br>
-                <span>Into Cash Flow.</span>
-            </h1>
 
-            <p class="hero-sub">
-                Organize disorganized info in seconds. Replace guesswork with Precision Analytics.<br>
-                <span style="color: #fff; font-weight: 500;">Stop Waiting. Start Winning.</span>
+        <!-- HERO -->
+        <section class="hero">
+            <h1 data-key="hero_title">Turn Data Chaos<br>Into Cash Flow.</h1>
+            <p>
+                <span data-key="hero_sub">Streamline scattered data instantly. Replace guesswork with Precision Analytics.</span>
+                <span style="color: #fff; display: block; margin-top: 10px;" data-key="hero_tagline">Stop Waiting. Start Winning.</span>
             </p>
         </section>
 
-        <!-- SERVICES BENTO GRID -->
-        <span class="section-label">Matriz de Soluciones</span>
+        <!-- SERVICIOS -->
+        <section id="soluciones">
+            <div class="section-header">
+                <span class="section-title" data-key="services_title">Strategic Solutions Ecosystem</span>
+            </div>
 
-        <div class="bento-container">
+            <div class="bento-grid">
+                
+                <!-- 01: INFRAESTRUCTURA -->
+                <div class="glass-card">
+                    <span class="card-num">01</span>
+                    <div>
+                        <div class="card-icon">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                        </div>
+                        <h3 class="card-title" data-key="card1_title">Data Engineering</h3>
+                        <p class="card-desc" data-key="card1_desc">The invisible architecture powering your business. Robust ETL pipelines and scalable Data Lakes. Without solid foundations, AI is just smoke.</p>
+                    </div>
+                    <div class="feature-tags">
+                        <span class="tag">Google Cloud</span>
+                        <span class="tag">BigQuery</span>
+                        <span class="tag">ETL/ELT</span>
+                    </div>
+                </div>
+
+                <!-- 02: AUTOMATIZACIÓN -->
+                <div class="glass-card">
+                    <span class="card-num">02</span>
+                    <div>
+                        <div class="card-icon">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                        </div>
+                        <h3 class="card-title" data-key="card2_title">Artificial Intelligence</h3>
+                        <p class="card-desc" data-key="card2_desc">Infinite digital workforce. Autonomous agents and NLP models operating 24/7 to eliminate human error.</p>
+                    </div>
+                    <div class="feature-tags">
+                        <span class="tag">AI Agents</span>
+                        <span class="tag">Gen AI</span>
+                        <span class="tag">Document AI</span>
+                    </div>
+                </div>
+
+                <!-- 03: ESTRATEGIA -->
+                <div class="glass-card">
+                    <span class="card-num">03</span>
+                    <div>
+                        <div class="card-icon">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="14.31" y1="8" x2="20.05" y2="17.94"/><line x1="9.69" y1="8" x2="21.17" y2="8"/><line x1="7.38" y1="12" x2="13.12" y2="2.06"/><line x1="9.69" y1="16" x2="3.95" y2="6.06"/><line x1="14.31" y1="16" x2="2.83" y2="16"/><line x1="16.62" y1="12" x2="10.88" y2="21.94"/></svg>
+                        </div>
+                        <h3 class="card-title" data-key="card3_title">Advanced Analytics</h3>
+                        <p class="card-desc" data-key="card3_desc">Mathematical precision. From intuition to prediction with Real-time Dashboards and high-impact market modeling.</p>
+                    </div>
+                    <div class="feature-tags">
+                        <span class="tag">Predictive</span>
+                        <span class="tag">Growth</span>
+                        <span class="tag">Geospatial</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ARCHIVO DE PROYECTOS -->
+        <section id="archivo" class="archive-box">
+            <h2 style="font-size: 2.5rem; font-weight: 600; margin-bottom: 16px;" data-key="archive_title">The Archive</h2>
+            <p style="color: var(--text-dim); max-width: 550px; margin: 0 auto; font-size: 1.1rem; line-height: 1.6;" data-key="archive_desc">
+                Explore the technical foundations behind the business results. Detailed case studies, architecture, and code.
+            </p>
+            <a href="https://github.com/efraingomez" target="_blank" class="archive-btn" data-key="archive_btn">
+                Explore Technical Intelligence
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+        </section>
+
+        <!-- CREDENCIALES: LISTA DE ALTO NIVEL -->
+        <section>
+            <div class="section-header">
+                <span class="section-title" data-key="auth_title">Authority & Competence</span>
+            </div>
+
+            <div style="margin-bottom: 40px;">
+                <h4 style="color: var(--text-dim); margin-bottom: 16px; font-weight: 400;" data-key="cat_business">Executive Education & Business</h4>
+                <div class="cred-grid">
+                    
+                    <div class="cred-pill">
+                        <span class="cred-role" data-key="cred_pm">Project Planning & Management</span>
+                        <span class="cred-issuer">University of California, Irvine</span>
+                        <span class="cred-type">Leadership</span>
+                    </div>
+
+                    <div class="cred-pill">
+                        <span class="cred-role" data-key="cred_mkt">Managerial Marketing</span>
+                        <span class="cred-issuer">Universidad de Chile</span>
+                        <span class="cred-type">Strategy</span>
+                    </div>
+
+                    <div class="cred-pill">
+                        <span class="cred-role" data-key="cred_cost">Business Costs</span>
+                        <span class="cred-issuer">Universidad de Chile</span>
+                        <span class="cred-type">Finance</span>
+                    </div>
+
+                    <div class="cred-pill">
+                        <span class="cred-role" data-key="cred_growth">Marketing Analytics</span>
+                        <span class="cred-issuer">Tecnológico de Monterrey</span>
+                        <span class="cred-type">Growth</span>
+                    </div>
+
+                    <div class="cred-pill">
+                        <span class="cred-role" data-key="cred_stats">Business Statistics</span>
+                        <span class="cred-issuer">Universidad Austral</span>
+                        <span class="cred-type">Analytics</span>
+                    </div>
+
+                    <div class="cred-pill">
+                        <span class="cred-role" data-key="cred_excel">Applied Excel for Business</span>
+                        <span class="cred-issuer">Universidad Austral</span>
+                        <span class="cred-type">Advanced</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div style="margin-bottom: 40px;">
+                <h4 style="color: var(--text-dim); margin-bottom: 16px; font-weight: 400;" data-key="cat_science">Data Science & Ethics</h4>
+                <div class="cred-grid">
+                    <div class="cred-pill">
+                        <span class="cred-role" data-key="cred_degree">Bachelor in Data Science</span>
+                        <span class="cred-issuer">Universidad de La Salle</span>
+                        <span class="cred-type" data-key="type_candidate">Degree Candidate</span>
+                    </div>
+                    <div class="cred-pill">
+                        <span class="cred-role">Process Mining: Data Science in Action</span>
+                        <span class="cred-issuer">Eindhoven University of Tech</span>
+                        <span class="cred-type">Optimization</span>
+                    </div>
+                    <div class="cred-pill">
+                        <span class="cred-role">Data Science Ethics</span>
+                        <span class="cred-issuer">University of Michigan</span>
+                        <span class="cred-type">Governance</span>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h4 style="color: var(--text-dim); margin-bottom: 16px; font-weight: 400;" data-key="cat_tech">Cloud Engineering (Google Elite)</h4>
+                <div class="cred-grid">
+                    
+                    <div class="cred-pill">
+                        <span class="cred-role">Engineer Data in Google Cloud</span>
+                        <span class="cred-issuer">Google Cloud</span>
+                        <span class="cred-type">Engineering</span>
+                    </div>
+
+                    <div class="cred-pill">
+                        <span class="cred-role">Predictive Analysis in BigQuery</span>
+                        <span class="cred-issuer">Google Cloud</span>
+                        <span class="cred-type">Predictive</span>
+                    </div>
+
+                    <div class="cred-pill">
+                        <span class="cred-role">Derive Insights from BigQuery Data</span>
+                        <span class="cred-issuer">Google Cloud</span>
+                        <span class="cred-type">Analytics</span>
+                    </div>
+
+                    <div class="cred-pill">
+                        <span class="cred-role">Prepare Data for Looker Dashboards</span>
+                        <span class="cred-issuer">Google Cloud</span>
+                        <span class="cred-type">Visualization</span>
+                    </div>
+
+                    <div class="cred-pill">
+                        <span class="cred-role">Automate Data Capture (Doc AI)</span>
+                        <span class="cred-issuer">Google Cloud</span>
+                        <span class="cred-type">Automation</span>
+                    </div>
+
+                    <div class="cred-pill">
+                        <span class="cred-role">Introduction to Generative AI</span>
+                        <span class="cred-issuer">Google Cloud</span>
+                        <span class="cred-type">Innovation</span>
+                    </div>
+                    
+                    <div class="cred-pill">
+                        <span class="cred-role">Serverless Cloud Run Development</span>
+                        <span class="cred-issuer">Google Cloud</span>
+                        <span class="cred-type">DevOps</span>
+                    </div>
+                    
+                    <div class="cred-pill">
+                        <span class="cred-role">Integrate with ML APIs</span>
+                        <span class="cred-issuer">Google Cloud</span>
+                        <span class="cred-type">Machine Learning</span>
+                    </div>
+
+                </div>
+            </div>
             
-            <!-- 01: IA (CORE) - 2 Columnas -->
-            <div class="card col-span-2 featured">
-                <div>
-                    <span class="card-num">01 / AUTOMATIZACIÓN</span>
-                    <h3>Laboratorio de agentes de Inteligencia Artificial</h3>
-                    <p>No es ciencia ficción, es eficiencia operativa. Desarrollamos agentes autónomos que trabajan 24/7. Convertimos preguntas complejas en respuestas claras y transformamos insights predictivos en valor monetario real.</p>
-                </div>
+            <div style="text-align: center; margin-top: 60px;">
+                 <a href="https://www.cloudskillsboost.google/public_profiles/61c80242-45e3-4682-a7d5-d365d648231a" target="_blank" style="color: var(--text-dim); text-decoration: none; border-bottom: 1px solid var(--glass-border); padding-bottom: 4px; font-size: 0.9rem;" data-key="verify_link">
+                    Verify Official Profile →
+                </a>
             </div>
-
-            <!-- 02: TOOLS - 1 Columna -->
-            <div class="card">
-                <div>
-                    <span class="card-num">02 / VISUALIZACIÓN</span>
-                    <h3>Herramientas de Analítica</h3>
-                    <p>Transformamos datos crudos en cuadros de mando de grado militar. Información en tiempo real que puedes usar <em>ahora</em>, no la próxima semana.</p>
-                </div>
-            </div>
-
-            <!-- 03: ADVANCED - 1 Columna -->
-            <div class="card">
-                <div>
-                    <span class="card-num">03 / PREDICCIÓN</span>
-                    <h3>Analítica Avanzada</h3>
-                    <p>Vamos más allá del BI tradicional. Usamos métodos estadísticos para decirte no solo qué pasó, sino qué pasará si no actúas hoy.</p>
-                </div>
-            </div>
-
-            <!-- 04: REAL TIME - 1 Columna -->
-            <div class="card">
-                <div>
-                    <span class="card-num">04 / VELOCIDAD</span>
-                    <h3>Analítica en tiempo real</h3>
-                    <p>La latencia mata negocios. Monitoreamos eventos en vivo para que ajustes tu estrategia antes de que la tendencia desaparezca.</p>
-                </div>
-            </div>
-
-            <!-- 05: DATA SCIENCE - 2 Columnas -->
-            <div class="card col-span-2 featured">
-                <div>
-                    <span class="card-num">05 / ESTRATEGIA</span>
-                    <h3>Ciencia de Datos</h3>
-                    <p>Descriptiva, Predictiva y Prescriptiva. Resolvemos la ecuación completa: Qué sucedió, por qué, y exactamente qué debes hacer al respecto para maximizar el ROI.</p>
-                </div>
-            </div>
-
-            <!-- 06: GEO - 1 Columna -->
-            <div class="card">
-                <div>
-                    <span class="card-num">06 / ESPACIAL</span>
-                    <h3>Geoanalítica</h3>
-                    <p>El "dónde" importa tanto como el "qué". Optimizamos ubicaciones y campañas basadas en el comportamiento físico de tus clientes.</p>
-                </div>
-            </div>
-
-            <!-- 07: IOT - 1 Columna -->
-            <div class="card">
-                <div>
-                    <span class="card-num">07 / CONECTIVIDAD</span>
-                    <h3>Analítica para IoT</h3>
-                    <p>Tus dispositivos hablan; nosotros traducimos. Integramos y analizamos la data de sensores para estrategias operativas de precisión.</p>
-                </div>
-            </div>
-
-            <!-- 08: AUTO - 3 Columnas (Fila completa visual en móvil, ancha en desktop) -->
-            <div class="card col-span-3 featured" style="background: radial-gradient(circle at top right, rgba(255,255,255,0.05), transparent 80%), #0F0F0F;">
-                <div>
-                    <span class="card-num">08 / ESCALABILIDAD</span>
-                    <h3>Automatización de modelos analíticos</h3>
-                    <p>Eliminamos el error humano y la subjetividad. Automatizamos el flujo desde el dato hasta la decisión, liberando a tu equipo para ejecutar estrategia de alto nivel mientras los modelos corren en piloto automático.</p>
-                </div>
-            </div>
-
-            <!-- AUTHORITY BLOCK -->
-            <div class="authority-block col-span-4" style="grid-column: 1 / -1;">
-                <div class="authority-text">
-                    <strong>Informe Oxford Economics</strong>
-                    <span>Validación externa: Cómo las empresas logran valor a través de estrategias holísticas.</span>
-                </div>
-                <a href="#" class="link-arrow">Acceder al Informe →</a>
-            </div>
-
-        </div>
+        </section>
 
     </main>
 
     <footer>
-        <div>Efraín Gómez © 2026</div>
-        <div style="font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.1em;">Data & AI Infrastructure</div>
+        <p>&copy; 2026 Efraín Gómez. Bogotá, Colombia. <span style="opacity: 0.5">Designed for the Future.</span></p>
     </footer>
 
     <script>
-        // Animación de entrada sutil (Fade In progresivo)
+        // --- LOGICA DE TRADUCCIÓN ---
+        const translations = {
+            en: {
+                nav_solutions: "Solutions",
+                nav_archive: "The Archive",
+                nav_contact: "Contact →",
+                hero_title: "Turn Data Chaos<br>Into Cash Flow.",
+                hero_sub: "Streamline scattered data instantly. Replace guesswork with Precision Analytics.",
+                hero_tagline: "Stop Waiting. Start Winning.",
+                services_title: "Strategic Solutions Ecosystem",
+                card1_title: "Data Engineering",
+                card1_desc: "The invisible architecture powering your business. Robust ETL pipelines and scalable Data Lakes. Without solid foundations, AI is just smoke.",
+                card2_title: "Artificial Intelligence",
+                card2_desc: "Infinite digital workforce. Autonomous agents and NLP models operating 24/7 to eliminate human error.",
+                card3_title: "Advanced Analytics",
+                card3_desc: "Mathematical precision. From intuition to prediction with Real-time Dashboards and high-impact market modeling.",
+                archive_title: "The Archive",
+                archive_desc: "Explore the technical foundations behind the business results. Detailed case studies, architecture, and code.",
+                archive_btn: "Explore Technical Intelligence",
+                auth_title: "Authority & Competence",
+                cat_business: "Executive Education & Business",
+                cat_science: "Data Science & Ethics",
+                cat_tech: "Cloud Engineering (Google Elite)",
+                cred_pm: "Project Planning & Management",
+                cred_mkt: "Managerial Marketing",
+                cred_cost: "Business Costs",
+                cred_growth: "Marketing Analytics",
+                cred_stats: "Business Statistics",
+                cred_excel: "Applied Excel for Business",
+                cred_degree: "Bachelor in Data Science",
+                type_candidate: "Degree Candidate",
+                verify_link: "Verify Official Profile →"
+            },
+            es: {
+                nav_solutions: "Soluciones",
+                nav_archive: "El Archivo",
+                nav_contact: "Contactar →",
+                hero_title: "Convierte el Caos<br>en Rentabilidad.",
+                hero_sub: "Organiza datos dispersos al instante. Reemplaza la suposición con Analítica de Precisión.",
+                hero_tagline: "Deja de Esperar. Empieza a Ganar.",
+                services_title: "Ecosistema de Soluciones Estratégicas",
+                card1_title: "Ingeniería de Datos",
+                card1_desc: "La arquitectura invisible que impulsa tu negocio. Pipelines ETL robustos y Data Lakes escalables. Sin cimientos sólidos, la IA es solo humo.",
+                card2_title: "Inteligencia Artificial",
+                card2_desc: "Fuerza laboral digital infinita. Agentes autónomos y modelos NLP operando 24/7 para eliminar el error humano.",
+                card3_title: "Analítica Avanzada",
+                card3_desc: "Precisión matemática. De la intuición a la predicción con Dashboards en tiempo real y modelado de mercado de alto impacto.",
+                archive_title: "El Archivo Técnico",
+                archive_desc: "Explora los cimientos técnicos detrás de los resultados de negocio. Casos de estudio detallados, arquitectura y código.",
+                archive_btn: "Explorar Inteligencia Técnica",
+                auth_title: "Autoridad y Competencia",
+                cat_business: "Formación Ejecutiva y Negocios",
+                cat_science: "Ciencia de Datos y Ética",
+                cat_tech: "Ingeniería Cloud (Google Elite)",
+                cred_pm: "Planificación y Gestión de Proyectos",
+                cred_mkt: "Marketing Gerencial",
+                cred_cost: "Costos para los Negocios",
+                cred_growth: "Analíticas de Marketing",
+                cred_stats: "Estadística para Negocios",
+                cred_excel: "Excel Aplicado a Negocios",
+                cred_degree: "Pregrado en Ciencia de Datos",
+                type_candidate: "Candidato a Título",
+                verify_link: "Verificar Perfil Oficial →"
+            }
+        };
+
+        function setLanguage(lang) {
+            // Actualizar textos
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+
+            // Actualizar botones
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`.lang-btn[onclick="setLanguage('${lang}')"]`).classList.add('active');
+        }
+
+        // --- EFECTOS VISUALES ---
+        
+        // Spotlight
+        document.addEventListener('mousemove', e => {
+            document.querySelectorAll('.glass-card').forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        // Intro Animation
         document.addEventListener('DOMContentLoaded', () => {
-            const cards = document.querySelectorAll('.card');
+            const elements = document.querySelectorAll('.hero, .glass-card, .archive-box, .cred-pill');
+            
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry, index) => {
                     if (entry.isIntersecting) {
                         setTimeout(() => {
                             entry.target.style.opacity = '1';
                             entry.target.style.transform = 'translateY(0)';
-                        }, index * 50); // Cascada rápida
+                        }, index * 50);
                         observer.unobserve(entry.target);
                     }
                 });
             }, { threshold: 0.1 });
 
-            cards.forEach(card => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                observer.observe(card);
+            elements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+                observer.observe(el);
             });
         });
     </script>
