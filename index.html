@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Efraín Gómez - Data Authority. Data Engineering & Strategy.">
+    <meta name="description" content="ELIT Data Systems - Data Authority. Data Engineering & Strategy.">
     <meta name="theme-color" content="#000000">
-    <title>Efraín Gómez | Data Authority</title>
+    <title>ELIT Data Systems | Data Authority</title>
     
     <!-- Fuentes Premium -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,24 +52,46 @@
         nav {
             position: fixed;
             top: 24px;
-            padding: 8px 12px 8px 24px;
-            background: rgba(10, 10, 10, 0.6);
+            padding: 8px 16px 8px 24px;
+            background: rgba(10, 10, 10, 0.7);
             backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
             border-radius: 100px;
             z-index: 100;
             display: flex;
-            gap: 24px;
+            gap: 20px;
             align-items: center;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
         }
 
         nav:hover {
             border-color: var(--glass-highlight);
-            box-shadow: 0 0 20px rgba(255,255,255,0.05);
+            box-shadow: 0 0 25px rgba(255,255,255,0.08);
         }
 
-        .nav-brand { color: #fff; font-weight: 600; padding-right: 12px; border-right: 1px solid var(--glass-border); }
+        /* LOGO STYLES */
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-logo {
+            height: 42px; /* Tamaño aumentado para presencia */
+            width: auto;
+            display: block;
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.1));
+        }
+
+        .fallback-logo-svg {
+            display: none;
+            height: 40px;
+            width: 40px;
+            color: #fff;
+        }
+
+        .nav-brand { color: #fff; font-weight: 600; padding-right: 12px; border-right: 1px solid var(--glass-border); font-size: 1.05rem; }
         
         .nav-link {
             color: var(--text-dim);
@@ -87,7 +109,7 @@
             background: rgba(255,255,255,0.05);
             border-radius: 20px;
             padding: 2px;
-            margin-left: 10px;
+            margin-left: 4px;
         }
 
         .lang-btn {
@@ -121,6 +143,9 @@
         .hero {
             text-align: center;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         h1 {
@@ -139,8 +164,27 @@
             color: var(--text-dim);
             font-weight: 300;
             max-width: 600px;
-            margin: 0 auto;
+            margin: 0 auto 40px;
             line-height: 1.6;
+        }
+        
+        .hero-btn {
+            padding: 16px 32px;
+            background: #fff;
+            color: #000;
+            border-radius: 100px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid transparent;
+        }
+        .hero-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(255,255,255,0.25);
+            border-color: #fff;
         }
 
         /* --- SERVICES GRID --- */
@@ -242,53 +286,124 @@
             color: var(--text-dim);
         }
 
-        /* --- THE ARCHIVE (INVITING CTA) --- */
-        .archive-box {
-            background: linear-gradient(135deg, #0a0a0a 0%, #000 100%);
+        /* --- POWER CTA SECTION --- */
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 255, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        }
+
+        .power-cta {
+            background: linear-gradient(135deg, #050505 0%, #111 100%);
             border: 1px solid var(--glass-border);
             border-radius: 32px;
             padding: 100px 20px;
             text-align: center;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
         }
         
-        /* Subtle glow background for Archive */
-        .archive-box::after {
+        .power-cta::after {
             content: '';
             position: absolute;
             top: 50%; left: 50%;
-            width: 60%; height: 60%;
-            background: radial-gradient(circle, rgba(255,255,255,0.05), transparent 70%);
+            width: 80%; height: 80%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.08), transparent 60%);
             transform: translate(-50%, -50%);
             pointer-events: none;
         }
         
-        .archive-btn {
-            margin-top: 40px;
+        .cta-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            background: linear-gradient(to right, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cta-btn {
+            margin-top: 24px;
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            padding: 18px 40px;
+            padding: 20px 48px;
             background: var(--text-luminous);
             color: #000;
             border-radius: 100px;
             text-decoration: none;
             font-weight: 600;
+            font-size: 1.1rem;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             z-index: 2;
+            animation: pulse-glow 2s infinite;
         }
-        .archive-btn:hover { 
+        .cta-btn:hover { 
             transform: scale(1.05); 
-            box-shadow: 0 0 30px rgba(255,255,255,0.3);
+            background: #fff;
+            animation: none;
+            box-shadow: 0 0 50px rgba(255,255,255,0.5);
         }
 
-        /* --- CREDENTIALS --- */
+        /* --- TESTIMONIALS SECTION --- */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .testimonial-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: relative;
+        }
+
+        .quote-icon {
+            color: var(--accent-blue);
+            font-size: 2rem;
+            opacity: 0.5;
+            font-family: serif;
+            line-height: 1;
+        }
+
+        .test-text {
+            color: #ddd;
+            font-style: italic;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .test-author {
+            display: flex;
+            flex-direction: column;
+            border-top: 1px solid var(--glass-border);
+            padding-top: 16px;
+        }
+
+        .author-name { font-weight: 600; color: #fff; }
+        .author-role { font-size: 0.8rem; color: var(--text-dim); margin-top: 2px; }
+
+        /* --- CREDENTIALS & LOGOS PERFECTOS --- */
         .cred-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 16px;
+        }
+
+        .cred-link-wrapper {
+            text-decoration: none;
+            color: inherit;
+            display: block;
         }
 
         .cred-pill {
@@ -299,22 +414,158 @@
             border: 1px solid var(--glass-border);
             border-radius: 16px;
             transition: 0.3s;
+            height: 100%;
+            position: relative;
         }
         
         .cred-pill:hover {
             background: rgba(255,255,255,0.04);
             border-color: var(--glass-highlight);
+            transform: translateY(-2px);
         }
 
-        .cred-role { font-size: 0.95rem; color: #fff; margin-bottom: 4px; font-weight: 500;}
-        .cred-issuer { font-size: 0.85rem; color: var(--text-dim); }
-        .cred-type { 
-            font-family: var(--font-mono); 
-            font-size: 0.7rem; 
-            color: var(--accent-blue); 
-            margin-top: 16px; 
-            text-transform: uppercase;
+        /* ESTILO LOGOS PERFECTOS */
+        .cred-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
         }
+
+        .org-logo {
+            width: 44px; /* Tamaño consistente */
+            height: 44px;
+            object-fit: contain; /* Evita que se estire */
+            background: #ffffff; /* Fondo blanco puro */
+            border-radius: 10px; /* Esquinas suavizadas */
+            padding: 6px; /* Espacio interno */
+            filter: grayscale(100%);
+            opacity: 0.85;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3); /* Sombra sutil */
+        }
+
+        /* Color al hover */
+        .cred-pill:hover .org-logo, .xp-card:hover .org-logo {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.05); /* Pop visual */
+            box-shadow: 0 8px 20px rgba(255,255,255,0.15); /* Brillo al hover */
+        }
+
+        .cred-pill::after {
+            content: '↗';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .cred-pill:hover::after { opacity: 1; }
+
+        /* Estilo especial para Educación Principal */
+        .cred-pill.highlight {
+            border: 1px solid var(--accent-blue);
+            background: rgba(59, 130, 246, 0.05);
+        }
+        .cred-pill.highlight:hover {
+            background: rgba(59, 130, 246, 0.1);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.1);
+        }
+
+        .cred-role { 
+            font-size: 1rem; 
+            color: #fff; 
+            font-weight: 500;
+            line-height: 1.3;
+        }
+        
+        .cred-issuer { 
+            font-size: 0.85rem; 
+            color: var(--text-dim); 
+        }
+        
+        .cred-date {
+            font-size: 0.75rem;
+            color: var(--accent-blue);
+            font-family: var(--font-mono);
+            margin-top: 4px;
+            display: block;
+        }
+        
+        /* Skills tags inside credentials */
+        .cred-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 16px;
+        }
+        
+        .skill-tag {
+            font-size: 0.7rem;
+            color: var(--text-luminous);
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+        }
+
+        /* --- EXPERIENCE SECTION --- */
+        .xp-card {
+            background: rgba(255,255,255,0.02);
+            border-left: 2px solid var(--accent-blue);
+            padding: 30px;
+            margin-bottom: 24px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .xp-card:hover {
+            transform: translateX(5px);
+            background: rgba(255,255,255,0.03);
+        }
+        
+        .xp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .xp-company-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .xp-role { font-size: 1.2rem; font-weight: 600; color: #fff; display: block; margin-bottom: 4px;}
+        .xp-company { color: var(--text-dim); font-weight: 400; font-size: 0.95rem; }
+        .xp-date { font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-blue); white-space: nowrap;}
+        
+        .xp-desc { 
+            color: var(--text-dim); 
+            line-height: 1.6; 
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+        
+        .xp-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            color: #fff;
+            text-decoration: none;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 2px;
+            transition: 0.3s;
+        }
+        .xp-link:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
 
         footer {
             border-top: 1px solid var(--glass-border);
@@ -322,17 +573,57 @@
             text-align: center;
             color: var(--text-dim);
             font-size: 0.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            align-items: center;
         }
+
+        .contact-row {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .contact-item {
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.8;
+            transition: 0.3s;
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50px;
+        }
+        .contact-item:hover { opacity: 1; color: #fff; background: rgba(255,255,255,0.1); }
 
     </style>
 </head>
 <body>
 
     <nav>
-        <span class="nav-brand">Efraín Gómez</span>
+        <!-- LOGO INTELIGENTE: Intenta cargar tu archivo, si falla, muestra el logo digital generado -->
+        <div class="logo-wrapper">
+            <img src="Logo.png" alt="Logo ELIT" class="nav-logo" onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='block';">
+            
+            <!-- Fallback SVG (Escudo tecnológico) por si la imagen no carga -->
+            <svg id="fallback-logo" class="fallback-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <path d="M12 8v4"/>
+                <path d="M12 16h.01"/>
+                <path d="M8 10l-2 2"/>
+                <path d="M16 10l2 2"/>
+            </svg>
+        </div>
+        
+        <span class="nav-brand">ELIT Data Systems</span>
         <a href="#soluciones" class="nav-link" data-key="nav_solutions">Solutions</a>
-        <a href="#archivo" class="nav-link" data-key="nav_archive">Archive</a>
-        <a href="mailto:contacto@efraingomez.com" class="nav-link" style="color: #fff;" data-key="nav_contact">Contact →</a>
+        <a href="#experience" class="nav-link" data-key="nav_xp">Experience</a>
+        <a href="#testimonials" class="nav-link" data-key="nav_testimonials">Endorsements</a>
+        <a href="https://wa.me/3025141055" class="nav-link" style="color: #fff;" data-key="nav_contact">Contact →</a>
         
         <div class="lang-switch">
             <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
@@ -349,6 +640,10 @@
                 <span data-key="hero_sub">Streamline scattered data instantly. Replace guesswork with Precision Analytics.</span>
                 <span style="color: #fff; display: block; margin-top: 10px;" data-key="hero_tagline">Stop Waiting. Start Winning.</span>
             </p>
+            <a href="https://wa.me/3025141055" class="hero-btn" data-key="hero_cta">
+                Initiate Strategy
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
         </section>
 
         <!-- SERVICIOS -->
@@ -413,154 +708,390 @@
             </div>
         </section>
 
-        <!-- ARCHIVO DE PROYECTOS -->
-        <section id="archivo" class="archive-box">
-            <h2 style="font-size: 2.5rem; font-weight: 600; margin-bottom: 16px;" data-key="archive_title">The Archive</h2>
-            <p style="color: var(--text-dim); max-width: 550px; margin: 0 auto; font-size: 1.1rem; line-height: 1.6;" data-key="archive_desc">
-                Explore the technical foundations behind the business results. Detailed case studies, architecture, and code.
-            </p>
-            <a href="https://github.com/efraingomez" target="_blank" class="archive-btn" data-key="archive_btn">
-                Explore Technical Intelligence
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
+        <!-- EXPERIENCE TRACK RECORD -->
+        <section id="experience">
+            <div class="section-header">
+                <span class="section-title" data-key="xp_title">Professional Track Record</span>
+            </div>
+            
+            <div style="max-width: 800px; margin: 0 auto;">
+                
+                <!-- Job: Red Raccoon Art House -->
+                <div class="xp-card">
+                    <div class="xp-header">
+                        <div class="xp-company-row">
+                            <!-- Fallback elegante con iniciales si no hay logo oficial -->
+                            <img src="https://ui-avatars.com/api/?name=Red+Raccoon&background=333&color=fff" alt="Red Raccoon" class="org-logo">
+                            <div>
+                                <span class="xp-role" data-key="job_redraccoon_role">Data Strategy Consulting</span>
+                                <span class="xp-company">Red Raccoon Art House</span>
+                            </div>
+                        </div>
+                        <span class="xp-date">Jul 2025 - Nov 2025</span>
+                    </div>
+                    <p class="xp-desc" data-key="job_redraccoon_desc">
+                        • Scalable Business Architecture: Spearheaded the comprehensive design of the business structure (Sales, Ops, Strategy), orchestrating systemic growth.<br>
+                        • Measurement Systems (KPIs): Designed executive dashboards for real-time profitability monitoring and built the Customer Journey growth engine.
+                    </p>
+                    <a href="https://1drv.ms/b/c/b0b57bca94bcbc44/IQCo-vUCUDp3TKFF1iWyeS3pARDc1fOZfamelEUkFrL76cY?e=G91YML" target="_blank" class="xp-link">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        <span data-key="verify_cert">Verify Employment Certificate</span>
+                    </a>
+                </div>
+
+                <!-- Job: Universidad de La Salle -->
+                <div class="xp-card">
+                    <div class="xp-header">
+                        <div class="xp-company-row">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Universidad_de_la_Salle_Colombia_logo.svg/1200px-Universidad_de_la_Salle_Colombia_logo.svg.png" alt="Universidad de La Salle" class="org-logo">
+                            <div>
+                                <span class="xp-role" data-key="job_lasalle_role">Data Analyst</span>
+                                <span class="xp-company">Universidad de La Salle</span>
+                            </div>
+                        </div>
+                        <span class="xp-date">Feb 2025 - Nov 2025</span>
+                    </div>
+                    <p class="xp-desc" data-key="job_lasalle_desc">
+                        • End-to-End Automation: Designed the digital ecosystem integrating Excel, Forms, and automated email flows for loan management.<br>
+                        • NLP & Retention: Processed +11,000 records diagnosing student attrition causes using natural language models.
+                    </p>
+                </div>
+
+                <!-- Job: Kiggu -->
+                <div class="xp-card">
+                    <div class="xp-header">
+                        <div class="xp-company-row">
+                            <img src="https://logo.clearbit.com/kiggu.com" onerror="this.src='https://ui-avatars.com/api/?name=Kiggu&background=333&color=fff'" alt="Kiggu" class="org-logo">
+                            <div>
+                                <span class="xp-role" data-key="job_kiggu_role">Sales Operations Analyst</span>
+                                <span class="xp-company">Kiggu</span>
+                            </div>
+                        </div>
+                        <span class="xp-date">Mar 2025 - Jul 2025</span>
+                    </div>
+                    <p class="xp-desc" data-key="job_kiggu_desc">
+                        • Advanced Analytics: Implemented a comprehensive Descriptive, Predictive, and Prescriptive analysis system to optimize decision-making.<br>
+                        • Machine Learning & AI: Developed statistical models and predictive algorithms using Scikit-learn APIs in Python.<br>
+                        • KPI Engineering: Designed and validated strategic KPIs, transforming raw data (+1,200 files) into actionable metrics.
+                    </p>
+                    <a href="https://1drv.ms/b/c/b0b57bca94bcbc44/IQBJZqXEL36vRa_w1v-Z_8MHAc6dnDV-qpb4okeA5CJ50pY?e=FNjq9Q" target="_blank" class="xp-link">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        <span data-key="verify_cert">Verify Employment Certificate</span>
+                    </a>
+                </div>
+
+                <!-- Job: Tendencys Innovations -->
+                <div class="xp-card">
+                    <div class="xp-header">
+                        <div class="xp-company-row">
+                            <img src="https://ui-avatars.com/api/?name=Tendencys&background=333&color=fff" alt="Tendencys" class="org-logo">
+                            <div>
+                                <span class="xp-role" data-key="job_tendencys_role">Business Developer</span>
+                                <span class="xp-company">Tendencys Innovations</span>
+                            </div>
+                        </div>
+                        <span class="xp-date">Sep 2023 - Oct 2024</span>
+                    </div>
+                    <p class="xp-desc" data-key="job_tendencys_desc">
+                        • Historic Sales Record: Designed the Data-Driven strategy that achieved the #1 Revenue Rank across 7 countries, optimizing resource allocation.
+                    </p>
+                    <a href="https://1drv.ms/b/c/b0b57bca94bcbc44/IQAX1317kOVhSah1-O3PHpNfAbVUUpnj-n5QxRSqxqSGpi4?e=vUv3hv" target="_blank" class="xp-link">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        <span data-key="verify_cert">Verify Employment Certificate</span>
+                    </a>
+                </div>
+
+                <!-- Job: Openpay Colombia -->
+                <div class="xp-card">
+                    <div class="xp-header">
+                        <div class="xp-company-row">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/8/86/Openpay_logo.svg" alt="Openpay" class="org-logo">
+                            <div>
+                                <span class="xp-role" data-key="job_openpay_role">Business Executive</span>
+                                <span class="xp-company">Openpay Colombia</span>
+                            </div>
+                        </div>
+                        <span class="xp-date">Jan 2023 - Aug 2023</span>
+                    </div>
+                    <p class="xp-desc" data-key="job_openpay_desc">
+                        • 800% Growth: Scaled the portfolio from $200M to $1.98B COP, managing 120 key accounts.<br>
+                        • Technical-Commercial Bridge: Led the technical integration of payment APIs, reducing friction in client onboarding.
+                    </p>
+                    <a href="https://1drv.ms/b/c/b0b57bca94bcbc44/IQDVb3fbgv6cTrIL95eVk0TEAYT-sqxzVxQbjxu82l_cFu8?e=L3OHvC" target="_blank" class="xp-link">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        <span data-key="verify_cert">Verify Employment Certificate</span>
+                    </a>
+                </div>
+                
+                <!-- Job: Red & Blue -->
+                <div class="xp-card">
+                    <div class="xp-header">
+                        <div class="xp-company-row">
+                            <img src="https://ui-avatars.com/api/?name=Red+Blue&background=333&color=fff" alt="Red & Blue" class="org-logo">
+                            <div>
+                                <span class="xp-role" data-key="job_redblue_role">Offline Team Leader</span>
+                                <span class="xp-company">Red & Blue Agency</span>
+                            </div>
+                        </div>
+                        <span class="xp-date">Jun 2022 - Nov 2022</span>
+                    </div>
+                    <p class="xp-desc" data-key="job_redblue_desc">
+                        • Demand Engine: Led the design of a lead generation system that consistently produced +70 SQLs/mo.<br>• High-Performance Management: Implemented conversion and efficiency KPIs to optimize the commercial strategy of an 8-person team.
+                    </p>
+                    <a href="https://onedrive.live.com/?viewid=c465df13%2D98e3%2D4b5c%2D8a3e%2D3e431c7a6bde&id=%2Fpersonal%2Fb0b57bca94bcbc44%2FDocuments%2FDesktop%2FCert%20Professional%2FCertificaci%C3%B3n%20Laboral%5FEfra%C3%ADn%20G%C3%B3mez%2E%2Epdf&parent=%2Fpersonal%2Fb0b57bca94bcbc44%2FDocuments%2FDesktop%2FCert%20Professional" target="_blank" class="xp-link">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        <span data-key="verify_cert">Verify Employment Certificate</span>
+                    </a>
+                </div>
+
+                <!-- Job: Crehana -->
+                <div class="xp-card">
+                    <div class="xp-header">
+                        <div class="xp-company-row">
+                            <img src="https://logo.clearbit.com/crehana.com" onerror="this.src='https://ui-avatars.com/api/?name=Crehana&background=333&color=fff'" alt="Crehana" class="org-logo">
+                            <div>
+                                <span class="xp-role" data-key="job_crehana_role">Sales Development Representative</span>
+                                <span class="xp-company">Crehana</span>
+                            </div>
+                        </div>
+                        <span class="xp-date">Dec 2021 - Jun 2022</span>
+                    </div>
+                    <p class="xp-desc" data-key="job_crehana_desc">
+                        • B2B Funnel Optimization: Restructured the qualification (BANT) and EdTech LatAm market segmentation process via strategic buyer persona analysis.<br>• Overachievement (>100%): Consistently exceeded quarterly quota, establishing a predictable acquisition engine (+10 SQLs/mo).
+                    </p>
+                    <a href="https://1drv.ms/b/c/b0b57bca94bcbc44/IQAL5e6rCkL6T5mfu7zXik8uAW7LYzl6tNgqE_wa-s2CADA?e=P1gZTT" target="_blank" class="xp-link">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        <span data-key="verify_cert">Verify Employment Certificate</span>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS & ALLIANCES -->
+        <section id="testimonials">
+            <div class="section-header">
+                <span class="section-title" data-key="test_title">Strategic Alliances & Endorsements</span>
+            </div>
+
+            <div class="testimonial-grid">
+                <!-- Testimonio 1 -->
+                <div class="testimonial-card">
+                    <span class="quote-icon">“</span>
+                    <p class="test-text" data-key="test_viviana">
+                        Tuve la oportunidad de trabajar con Efrain, él se destaca por su profesionalismo, compromiso y excelentes entregas de automatización. Trabajamos en conjunto en el programa 'A rodar Unisalle' para automatizar la solicitud de préstamo de bicicletas.
+                        <br><br>
+                        Si buscas un experto en automatización y análisis de datos, te recomiendo considerar a Efrain. Estoy segura de que será un valioso activo para tu organización.
+                    </p>
+                    <div class="test-author">
+                        <span class="author-name">Viviana L. Pardo Reyes</span>
+                        <span class="author-role">Gestión Ambiental & Sostenibilidad</span>
+                    </div>
+                </div>
+
+                <!-- Testimonio 2 -->
+                <div class="testimonial-card">
+                    <span class="quote-icon">“</span>
+                    <p class="test-text" data-key="test_andres">
+                        Trabajé con Efraín en un proyecto bancario para BBVA Colombia muy importante. De inmediato me di cuenta de su elocuencia y su facilidad para determinar conversaciones muy acertadas. 
+                        <br><br>
+                        Sin duda sería muy importante para cualquier organización y su entorno comercial. ¡Éxitos para Efra!
+                    </p>
+                    <div class="test-author">
+                        <span class="author-name">Andrés González Muñoz</span>
+                        <span class="author-role">Product Development Manager @ Gilmedica S.A.S</span>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- CREDENCIALES: LISTA DE ALTO NIVEL -->
         <section>
             <div class="section-header">
-                <span class="section-title" data-key="auth_title">Authority & Competence</span>
+                <span class="section-title" data-key="auth_title">Certified Technical Authority</span>
             </div>
 
-            <div style="margin-bottom: 40px;">
-                <h4 style="color: var(--text-dim); margin-bottom: 16px; font-weight: 400;" data-key="cat_business">Executive Education & Business</h4>
-                <div class="cred-grid">
-                    
-                    <div class="cred-pill">
-                        <span class="cred-role" data-key="cred_pm">Project Planning & Management</span>
-                        <span class="cred-issuer">University of California, Irvine</span>
-                        <span class="cred-type">Leadership</span>
+            <div class="cred-grid">
+                
+                <!-- ACADEMIC: Universidad de La Salle -->
+                <div class="cred-pill highlight">
+                    <div class="cred-header">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Universidad_de_la_Salle_Colombia_logo.svg/1200px-Universidad_de_la_Salle_Colombia_logo.svg.png" alt="La Salle" class="org-logo">
+                        <div>
+                            <span class="cred-role" data-key="edu_degree">Professional in Data Science</span>
+                            <span class="cred-issuer">Universidad de La Salle</span>
+                        </div>
                     </div>
-
-                    <div class="cred-pill">
-                        <span class="cred-role" data-key="cred_mkt">Managerial Marketing</span>
-                        <span class="cred-issuer">Universidad de Chile</span>
-                        <span class="cred-type">Strategy</span>
-                    </div>
-
-                    <div class="cred-pill">
-                        <span class="cred-role" data-key="cred_cost">Business Costs</span>
-                        <span class="cred-issuer">Universidad de Chile</span>
-                        <span class="cred-type">Finance</span>
-                    </div>
-
-                    <div class="cred-pill">
-                        <span class="cred-role" data-key="cred_growth">Marketing Analytics</span>
-                        <span class="cred-issuer">Tecnológico de Monterrey</span>
-                        <span class="cred-type">Growth</span>
-                    </div>
-
-                    <div class="cred-pill">
-                        <span class="cred-role" data-key="cred_stats">Business Statistics</span>
-                        <span class="cred-issuer">Universidad Austral</span>
-                        <span class="cred-type">Analytics</span>
-                    </div>
-
-                    <div class="cred-pill">
-                        <span class="cred-role" data-key="cred_excel">Applied Excel for Business</span>
-                        <span class="cred-issuer">Universidad Austral</span>
-                        <span class="cred-type">Advanced</span>
-                    </div>
-
-                </div>
-            </div>
-
-            <div style="margin-bottom: 40px;">
-                <h4 style="color: var(--text-dim); margin-bottom: 16px; font-weight: 400;" data-key="cat_science">Data Science & Ethics</h4>
-                <div class="cred-grid">
-                    <div class="cred-pill">
-                        <span class="cred-role" data-key="cred_degree">Bachelor in Data Science</span>
-                        <span class="cred-issuer">Universidad de La Salle</span>
-                        <span class="cred-type" data-key="type_candidate">Degree Candidate</span>
-                    </div>
-                    <div class="cred-pill">
-                        <span class="cred-role">Process Mining: Data Science in Action</span>
-                        <span class="cred-issuer">Eindhoven University of Tech</span>
-                        <span class="cred-type">Optimization</span>
-                    </div>
-                    <div class="cred-pill">
-                        <span class="cred-role">Data Science Ethics</span>
-                        <span class="cred-issuer">University of Michigan</span>
-                        <span class="cred-type">Governance</span>
+                    <span class="cred-date" data-key="edu_date">Jun 2024 - Jun 2028</span>
+                    <div class="cred-skills">
+                        <span class="skill-tag">Advanced Analytics</span>
+                        <span class="skill-tag">Big Data</span>
+                        <span class="skill-tag">Research</span>
                     </div>
                 </div>
-            </div>
 
-            <div>
-                <h4 style="color: var(--text-dim); margin-bottom: 16px; font-weight: 400;" data-key="cat_tech">Cloud Engineering (Google Elite)</h4>
-                <div class="cred-grid">
-                    
+                <!-- IBM Applied Data Science Capstone -->
+                <a href="https://www.coursera.org/account/accomplishments/verify/LA5SCJR90XQH" target="_blank" class="cred-link-wrapper">
                     <div class="cred-pill">
-                        <span class="cred-role">Engineer Data in Google Cloud</span>
-                        <span class="cred-issuer">Google Cloud</span>
-                        <span class="cred-type">Engineering</span>
+                        <div class="cred-header">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM" class="org-logo">
+                            <div>
+                                <span class="cred-role">Applied Data Science Capstone</span>
+                                <span class="cred-issuer">IBM</span>
+                            </div>
+                        </div>
+                        <div class="cred-skills">
+                            <span class="skill-tag">Data Science</span>
+                            <span class="skill-tag">Pandas</span>
+                            <span class="skill-tag">Machine Learning</span>
+                            <span class="skill-tag">Plotly</span>
+                        </div>
                     </div>
-
-                    <div class="cred-pill">
-                        <span class="cred-role">Predictive Analysis in BigQuery</span>
-                        <span class="cred-issuer">Google Cloud</span>
-                        <span class="cred-type">Predictive</span>
-                    </div>
-
-                    <div class="cred-pill">
-                        <span class="cred-role">Derive Insights from BigQuery Data</span>
-                        <span class="cred-issuer">Google Cloud</span>
-                        <span class="cred-type">Analytics</span>
-                    </div>
-
-                    <div class="cred-pill">
-                        <span class="cred-role">Prepare Data for Looker Dashboards</span>
-                        <span class="cred-issuer">Google Cloud</span>
-                        <span class="cred-type">Visualization</span>
-                    </div>
-
-                    <div class="cred-pill">
-                        <span class="cred-role">Automate Data Capture (Doc AI)</span>
-                        <span class="cred-issuer">Google Cloud</span>
-                        <span class="cred-type">Automation</span>
-                    </div>
-
-                    <div class="cred-pill">
-                        <span class="cred-role">Introduction to Generative AI</span>
-                        <span class="cred-issuer">Google Cloud</span>
-                        <span class="cred-type">Innovation</span>
-                    </div>
-                    
-                    <div class="cred-pill">
-                        <span class="cred-role">Serverless Cloud Run Development</span>
-                        <span class="cred-issuer">Google Cloud</span>
-                        <span class="cred-type">DevOps</span>
-                    </div>
-                    
-                    <div class="cred-pill">
-                        <span class="cred-role">Integrate with ML APIs</span>
-                        <span class="cred-issuer">Google Cloud</span>
-                        <span class="cred-type">Machine Learning</span>
-                    </div>
-
-                </div>
-            </div>
-            
-            <div style="text-align: center; margin-top: 60px;">
-                 <a href="https://www.cloudskillsboost.google/public_profiles/61c80242-45e3-4682-a7d5-d365d648231a" target="_blank" style="color: var(--text-dim); text-decoration: none; border-bottom: 1px solid var(--glass-border); padding-bottom: 4px; font-size: 0.9rem;" data-key="verify_link">
-                    Verify Official Profile →
                 </a>
+
+                <!-- Introduction to Data Analytics -->
+                <a href="https://www.coursera.org/account/accomplishments/verify/CC9NKQU5BI6A" target="_blank" class="cred-link-wrapper">
+                    <div class="cred-pill">
+                        <div class="cred-header">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg" alt="Meta" class="org-logo">
+                            <div>
+                                <span class="cred-role">Introduction to Data Analytics</span>
+                                <span class="cred-issuer">Meta</span>
+                            </div>
+                        </div>
+                        <div class="cred-skills">
+                            <span class="skill-tag">Data Analysis</span>
+                            <span class="skill-tag">Marketing</span>
+                            <span class="skill-tag">Data Cleansing</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Python Data Analytics -->
+                <a href="https://www.coursera.org/account/accomplishments/verify/UDKK47H13W67" target="_blank" class="cred-link-wrapper">
+                    <div class="cred-pill">
+                        <div class="cred-header">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg" alt="Meta" class="org-logo">
+                            <div>
+                                <span class="cred-role">Python Data Analytics</span>
+                                <span class="cred-issuer">Meta</span>
+                            </div>
+                        </div>
+                        <div class="cred-skills">
+                            <span class="skill-tag">Pandas</span>
+                            <span class="skill-tag">Data Modeling</span>
+                            <span class="skill-tag">EDA</span>
+                            <span class="skill-tag">Matplotlib</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Python Project for Data Science -->
+                <a href="https://www.coursera.org/account/accomplishments/verify/T17AJO1N04OE" target="_blank" class="cred-link-wrapper">
+                    <div class="cred-pill">
+                        <div class="cred-header">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM" class="org-logo">
+                            <div>
+                                <span class="cred-role">Python Project for Data Science</span>
+                                <span class="cred-issuer">IBM</span>
+                            </div>
+                        </div>
+                        <div class="cred-skills">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Dashboards</span>
+                            <span class="skill-tag">Beautiful Soup</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Python for Data Science, AI & Development -->
+                <a href="https://www.coursera.org/account/accomplishments/verify/TVP8BOKG7IZC" target="_blank" class="cred-link-wrapper">
+                    <div class="cred-pill">
+                        <div class="cred-header">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM" class="org-logo">
+                            <div>
+                                <span class="cred-role">Python for Data Science & AI</span>
+                                <span class="cred-issuer">IBM</span>
+                            </div>
+                        </div>
+                        <div class="cred-skills">
+                            <span class="skill-tag">NumPy</span>
+                            <span class="skill-tag">APIs</span>
+                            <span class="skill-tag">OOP</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- SQL for Data Science -->
+                <a href="https://www.coursera.org/account/accomplishments/verify/UN1HIZA5KEPM" target="_blank" class="cred-link-wrapper">
+                    <div class="cred-pill">
+                        <div class="cred-header">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/UC_Davis_Aggies_logo.svg" alt="UC Davis" class="org-logo">
+                            <div>
+                                <span class="cred-role">SQL for Data Science</span>
+                                <span class="cred-issuer">University of California, Davis</span>
+                            </div>
+                        </div>
+                        <div class="cred-skills">
+                            <span class="skill-tag">Advanced SQL</span>
+                            <span class="skill-tag">Relational DBs</span>
+                            <span class="skill-tag">Data Manipulation</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Google Cloud Badge -->
+                <a href="https://www.credly.com/badges/6aebf5ee-f4c5-4e5a-8b51-3e164f2804e1/linked_in_profile" target="_blank" class="cred-link-wrapper">
+                    <div class="cred-pill">
+                        <div class="cred-header">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg" alt="Google Cloud" class="org-logo">
+                            <div>
+                                <span class="cred-role">Store, Process, and Manage Data</span>
+                                <span class="cred-issuer">Google Cloud</span>
+                            </div>
+                        </div>
+                        <div class="cred-skills">
+                            <span class="skill-tag">Cloud Functions</span>
+                            <span class="skill-tag">Cloud Storage</span>
+                            <span class="skill-tag">Pub/Sub</span>
+                        </div>
+                    </div>
+                </a>
+
             </div>
+        </section>
+
+        <!-- HIGH SYNERGY CTA (REPLACES ARCHIVE) -->
+        <section class="power-cta">
+            <h2 class="cta-title" data-key="cta_title">Ready to Deploy?</h2>
+            <p style="color: var(--text-dim); font-size: 1.1rem; max-width: 600px; line-height: 1.6;" data-key="cta_desc">
+                Stop analyzing past performance. Start engineering future growth.
+                The expertise is proven. The synergy is ready.
+            </p>
+            <a href="https://wa.me/3025141055" class="cta-btn" data-key="cta_btn">
+                Launch Partnership
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
         </section>
 
     </main>
 
     <footer>
-        <p>&copy; 2026 Efraín Gómez. Bogotá, Colombia. <span style="opacity: 0.5">Designed for the Future.</span></p>
+        <div class="contact-row">
+            <a href="mailto:efraingoomez@outlook.com" class="contact-item">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                Email
+            </a>
+            <a href="https://wa.me/3025141055" class="contact-item">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                WhatsApp
+            </a>
+            <a href="https://www.linkedin.com/in/efrain-data-science/" target="_blank" class="contact-item">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                LinkedIn
+            </a>
+        </div>
+        <p style="margin-top: 24px;">&copy; 2026 ELIT Data Systems. Bogotá, Colombia. <span style="opacity: 0.5">Designed for the Future.</span></p>
     </footer>
 
     <script>
@@ -568,11 +1099,13 @@
         const translations = {
             en: {
                 nav_solutions: "Solutions",
-                nav_archive: "The Archive",
+                nav_xp: "Experience",
+                nav_testimonials: "Endorsements",
                 nav_contact: "Contact →",
                 hero_title: "Turn Data Chaos<br>Into Cash Flow.",
                 hero_sub: "Streamline scattered data instantly. Replace guesswork with Precision Analytics.",
                 hero_tagline: "Stop Waiting. Start Winning.",
+                hero_cta: "Initiate Strategy",
                 services_title: "Strategic Solutions Ecosystem",
                 card1_title: "Data Engineering",
                 card1_desc: "The invisible architecture powering your business. Robust ETL pipelines and scalable Data Lakes. Without solid foundations, AI is just smoke.",
@@ -580,30 +1113,62 @@
                 card2_desc: "Infinite digital workforce. Autonomous agents and NLP models operating 24/7 to eliminate human error.",
                 card3_title: "Advanced Analytics",
                 card3_desc: "Mathematical precision. From intuition to prediction with Real-time Dashboards and high-impact market modeling.",
-                archive_title: "The Archive",
-                archive_desc: "Explore the technical foundations behind the business results. Detailed case studies, architecture, and code.",
-                archive_btn: "Explore Technical Intelligence",
-                auth_title: "Authority & Competence",
-                cat_business: "Executive Education & Business",
-                cat_science: "Data Science & Ethics",
-                cat_tech: "Cloud Engineering (Google Elite)",
-                cred_pm: "Project Planning & Management",
-                cred_mkt: "Managerial Marketing",
-                cred_cost: "Business Costs",
-                cred_growth: "Marketing Analytics",
-                cred_stats: "Business Statistics",
-                cred_excel: "Applied Excel for Business",
-                cred_degree: "Bachelor in Data Science",
-                type_candidate: "Degree Candidate",
-                verify_link: "Verify Official Profile →"
+                auth_title: "Certified Technical Authority",
+                xp_title: "Professional Track Record",
+                test_title: "Strategic Alliances & Endorsements",
+                
+                // Testimonials
+                test_viviana: "I had the opportunity to work with Efrain, he stands out for his professionalism, commitment and excellent automation deliveries. We worked together on the 'A rodar Unisalle' program to automate the bicycle loan request flows.<br><br>If you are looking for an expert in automation and data analysis, I recommend Efrain. I am sure he will be a valuable asset to your organization.",
+                test_andres: "I worked with Efraín on a very important banking project for BBVA Colombia. I immediately noticed his eloquence and his ease in determining very accurate conversations.<br><br>Without a doubt, he would be very important for any organization and its commercial environment. Success for Efra!",
+
+                // Education
+                edu_degree: "Professional in Data Science",
+                edu_date: "Jun 2024 - Jun 2028",
+
+                // CTA
+                cta_title: "Ready to Deploy?",
+                cta_desc: "Stop analyzing past performance. Start engineering future growth. The expertise is proven. The synergy is ready.",
+                cta_btn: "Launch Partnership",
+                
+                // Job: Red Raccoon
+                job_redraccoon_role: "Data Strategy Consulting",
+                job_redraccoon_desc: "• Scalable Business Architecture: Spearheaded the comprehensive design of the business structure (Sales, Ops, Strategy), orchestrating systemic growth.<br>• Measurement Systems (KPIs): Designed executive dashboards for real-time profitability monitoring and built the Customer Journey growth engine.",
+                
+                // Job: La Salle
+                job_lasalle_role: "Data Analyst",
+                job_lasalle_desc: "• End-to-End Automation: Designed the digital ecosystem integrating Excel, Forms, and automated email flows for loan management.<br>• NLP & Retention: Processed +11,000 records diagnosing student attrition causes using natural language models.",
+                
+                // Job: Kiggu
+                job_kiggu_role: "Sales Operations Analyst",
+                job_kiggu_desc: "• Advanced Analytics: Implemented a comprehensive Descriptive, Predictive, and Prescriptive analysis system to optimize decision-making.<br>• Machine Learning & AI: Developed statistical models and predictive algorithms using Scikit-learn APIs in Python.<br>• KPI Engineering: Designed and validated strategic KPIs, transforming raw data (+1,200 files) into actionable metrics.",
+                
+                // Job: Tendencys
+                job_tendencys_role: "Business Developer",
+                job_tendencys_desc: "• Historic Sales Record: Designed the Data-Driven strategy that achieved the #1 Revenue Rank across 7 countries, optimizing resource allocation.",
+                
+                // Job: Openpay
+                job_openpay_role: "Business Executive",
+                job_openpay_desc: "• 800% Growth: Scaled the portfolio from $200M to $1.98B COP, managing 120 key accounts.<br>• Technical-Commercial Bridge: Led the technical integration of payment APIs, reducing friction in client onboarding.",
+                
+                // Job: Red & Blue
+                job_redblue_role: "Offline Team Leader",
+                job_redblue_desc: "• Demand Engine: Led the design of a lead generation system that consistently produced +70 SQLs/mo.<br>• High-Performance Management: Implemented conversion and efficiency KPIs to optimize the commercial strategy of an 8-person team.",
+                
+                // Job: Crehana
+                job_crehana_role: "Sales Development Representative",
+                job_crehana_desc: "• B2B Funnel Optimization: Restructured the qualification (BANT) and EdTech LatAm market segmentation process via strategic buyer persona analysis.<br>• Overachievement (>100%): Consistently exceeded quarterly quota, establishing a predictable acquisition engine (+10 SQLs/mo).",
+                
+                verify_cert: "Verify Employment Certificate"
             },
             es: {
                 nav_solutions: "Soluciones",
-                nav_archive: "El Archivo",
+                nav_xp: "Experiencia",
+                nav_testimonials: "Testimonios",
                 nav_contact: "Contactar →",
                 hero_title: "Convierte el Caos<br>en Rentabilidad.",
                 hero_sub: "Organiza datos dispersos al instante. Reemplaza la suposición con Analítica de Precisión.",
                 hero_tagline: "Deja de Esperar. Empieza a Ganar.",
+                hero_cta: "Iniciar Estrategia",
                 services_title: "Ecosistema de Soluciones Estratégicas",
                 card1_title: "Ingeniería de Datos",
                 card1_desc: "La arquitectura invisible que impulsa tu negocio. Pipelines ETL robustos y Data Lakes escalables. Sin cimientos sólidos, la IA es solo humo.",
@@ -611,22 +1176,52 @@
                 card2_desc: "Fuerza laboral digital infinita. Agentes autónomos y modelos NLP operando 24/7 para eliminar el error humano.",
                 card3_title: "Analítica Avanzada",
                 card3_desc: "Precisión matemática. De la intuición a la predicción con Dashboards en tiempo real y modelado de mercado de alto impacto.",
-                archive_title: "El Archivo Técnico",
-                archive_desc: "Explora los cimientos técnicos detrás de los resultados de negocio. Casos de estudio detallados, arquitectura y código.",
-                archive_btn: "Explorar Inteligencia Técnica",
-                auth_title: "Autoridad y Competencia",
-                cat_business: "Formación Ejecutiva y Negocios",
-                cat_science: "Ciencia de Datos y Ética",
-                cat_tech: "Ingeniería Cloud (Google Elite)",
-                cred_pm: "Planificación y Gestión de Proyectos",
-                cred_mkt: "Marketing Gerencial",
-                cred_cost: "Costos para los Negocios",
-                cred_growth: "Analíticas de Marketing",
-                cred_stats: "Estadística para Negocios",
-                cred_excel: "Excel Aplicado a Negocios",
-                cred_degree: "Pregrado en Ciencia de Datos",
-                type_candidate: "Candidato a Título",
-                verify_link: "Verificar Perfil Oficial →"
+                auth_title: "Autoridad Técnica Certificada",
+                xp_title: "Trayectoria Profesional",
+                test_title: "Alianzas Estratégicas & Respaldo",
+
+                // Testimonials
+                test_viviana: "Tuve la oportunidad de trabajar con Efrain, él se destaca por su profesionalismo, compromiso y excelentes entregas de automatización. Trabajamos en conjunto en el programa 'A rodar Unisalle' para automatizar la solicitud de préstamo de bicicletas.<br><br>Si buscas un experto en automatización y análisis de datos, te recomiendo considerar a Efrain. Estoy segura de que será un valioso activo para tu organización.",
+                test_andres: "Trabajé con Efraín en un proyecto bancario para BBVA Colombia muy importante. De inmediato me di cuenta de su elocuencia y su facilidad para determinar conversaciones muy acertadas.<br><br>Sin duda sería muy importante para cualquier organización y su entorno comercial. ¡Éxitos para Efra!",
+                
+                // Education
+                edu_degree: "Profesional en Ciencia de Datos",
+                edu_date: "Jun 2024 - Jun 2028",
+
+                // CTA
+                cta_title: "¿Listo para Desplegar?",
+                cta_desc: "Deja de analizar el rendimiento pasado. Empieza a diseñar el crecimiento futuro. La experiencia está probada. La sinergia está lista.",
+                cta_btn: "Iniciar Alianza",
+                
+                // Job: Red Raccoon
+                job_redraccoon_role: "Consultoría de Estrategia de Datos",
+                job_redraccoon_desc: "• Arquitectura de Negocio Escalable: Lideré el diseño integral de la estructura empresarial (Ventas, Ops, Estrategia), orquestando un crecimiento sistémico.<br>• Sistemas de Medición (KPIs): Diseñé dashboards ejecutivos para el monitoreo de rentabilidad en tiempo real y construí el motor de crecimiento (Customer Journey).",
+                
+                // Job: La Salle
+                job_lasalle_role: "Analista de Datos",
+                job_lasalle_desc: "• Automatización End-to-End: Diseñé el ecosistema digital integrando Excel, Forms y flujos de correo automatizados para la gestión de préstamos.<br>• NLP y Retención: Procesé +11,000 registros diagnosticando causas de deserción estudiantil utilizando modelos de lenguaje natural.",
+                
+                // Job: Kiggu
+                job_kiggu_role: "Analista de Operaciones de Ventas",
+                job_kiggu_desc: "• Analítica Avanzada: Implementé un sistema integral de análisis Descriptivo, Predictivo y Prescriptivo para optimizar la toma de decisiones.<br>• Machine Learning e IA: Desarrollé modelos estadísticos y algoritmos predictivos usando APIs de Scikit-learn en Python.<br>• Ingeniería de KPIs: Diseñé y validé KPIs estratégicos, transformando datos crudos (+1,200 archivos) en métricas de alto valor.",
+                
+                // Job: Tendencys
+                job_tendencys_role: "Desarrollador de Negocios",
+                job_tendencys_desc: "• Récord Histórico de Ventas: Diseñé la estrategia Data-Driven que logró el Rank #1 de Ingresos en 7 países, optimizando la asignación de recursos.",
+                
+                // Job: Openpay
+                job_openpay_role: "Ejecutivo de Negocios",
+                job_openpay_desc: "• Crecimiento del 800%: Escalé el portafolio de $200M a $1.98B COP, gestionando 120 cuentas clave.<br>• Puente Técnico-Comercial: Lideré la integración técnica de APIs de pago, reduciendo la fricción en el onboarding de clientes.",
+                
+                // Job: Red & Blue
+                job_redblue_role: "Líder de Equipo Offline",
+                job_redblue_desc: "• Motor de Demanda: Lideré el diseño de un sistema de generación de leads que produjo constantemente +70 SQLs/mes.<br>• Gestión de Alto Rendimiento: Implementé KPIs de conversión y eficiencia para optimizar la estrategia comercial de un equipo de 8 personas.",
+                
+                // Job: Crehana
+                job_crehana_role: "Representante de Desarrollo de Ventas",
+                job_crehana_desc: "• Optimización de Funnel B2B: Reestructuré el proceso de calificación (BANT) y segmentación del mercado EdTech LatAm mediante análisis estratégico de buyer persona.<br>• Superación de Objetivos (>100%): Excedí consistentemente la cuota trimestral, estableciendo un motor de adquisición predecible (+10 SQLs/mes).",
+                
+                verify_cert: "Verificar Certificado Laboral"
             }
         };
 
@@ -661,7 +1256,7 @@
 
         // Intro Animation
         document.addEventListener('DOMContentLoaded', () => {
-            const elements = document.querySelectorAll('.hero, .glass-card, .archive-box, .cred-pill');
+            const elements = document.querySelectorAll('.hero, .glass-card, .power-cta, .cred-pill, .xp-card, .testimonial-card');
             
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry, index) => {
