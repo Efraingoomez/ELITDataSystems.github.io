@@ -7,31 +7,31 @@
     <meta name="theme-color" content="#ffffff">
     <title>ELIT Data Systems | Efrain Gomez</title>
     
-    <!-- Fuentes Premium: Montserrat (Estructura) + Merriweather (Elegancia) -->
+    <!-- Fuentes Premium -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-        /* --- SYSTEM TOKENS (Pure Executive White) --- */
+        /* --- SYSTEM TOKENS (Executive White) --- */
         :root {
             --bg-deep: #ffffff; 
-            --bg-mid: #fafafa; /* Casi blanco puro */
+            --bg-mid: #f8fafc; /* Slate 50 */
             
             --surface-card: #ffffff;
-            --border-light: #f1f5f9; /* Slate 100 - Borde casi invisible */
-            --border-hover: #e2e8f0; /* Slate 200 */
+            --border-light: #e2e8f0; /* Slate 200 */
+            --border-hover: #cbd5e1; /* Slate 300 */
             
-            --text-luminous: #0f172a; /* Slate 900 - Negro suave */
-            --text-dim: #475569; /* Slate 600 - Texto secundario */
-            --text-subtitle: #94a3b8; /* Slate 400 - Metadatos */
+            --text-luminous: #0f172a; /* Slate 900 */
+            --text-dim: #334155; /* Slate 700 */
+            --text-subtitle: #64748b; /* Slate 500 */
             
-            --accent-blue: #000000; /* Negro para acentos principales (Estilo Uber/Apple) */
-            --accent-highlight: #2563eb; /* Azul para enlaces */
-            --accent-gold: #b45309; 
+            --accent-blue: #000000; /* Negro para acentos principales */
+            --accent-highlight: #2563eb; /* Azul corporativo para enlaces */
+            --accent-gold: #b45309; /* Dorado oscuro para toques premium */
             
-            --shadow-soft: 0 0 0 1px rgba(0,0,0,0.03), 0 2px 8px rgba(0,0,0,0.04);
-            --shadow-hover: 0 0 0 1px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.08);
+            --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
             
             --font-display: 'Montserrat', sans-serif;
             --font-body: 'Merriweather', serif;
@@ -42,7 +42,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
-            background-color: var(--bg-deep);
+            background-color: var(--bg-mid);
             color: var(--text-luminous);
             font-family: var(--font-body);
             min-height: 100vh;
@@ -50,20 +50,21 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            background-image: linear-gradient(to bottom, #ffffff 0%, var(--bg-mid) 100%);
         }
 
         /* --- UI COMPONENTS --- */
         
-        /* Navbar Ultra Clean */
+        /* Navbar */
         nav {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            padding: 16px 40px;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            padding: 12px 40px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border-light);
             z-index: 100;
             display: flex;
@@ -74,15 +75,11 @@
         
         .nav-left { display: flex; align-items: center; gap: 16px; }
 
-        /* Logo Styling */
         .logo-wrapper {
-            height: 48px; width: 48px; border-radius: 8px; overflow: hidden;
-            /* Fondo blanco para asegurar limpieza */
-            background: #fff;
+            height: 40px; width: 40px; border-radius: 8px; overflow: hidden;
+            background: #fff; display: flex; align-items: center; justify-content: center;
         }
-        .nav-logo-img {
-            width: 100%; height: 100%; object-fit: contain;
-        }
+        .nav-logo-img { width: 100%; height: 100%; object-fit: contain; }
 
         .nav-brand { 
             color: var(--text-luminous); 
@@ -106,7 +103,6 @@
 
         .nav-right { display: flex; align-items: center; gap: 20px; }
 
-        /* CTA Button - High Contrast */
         .nav-cta {
             background: var(--text-luminous);
             color: #fff;
@@ -121,15 +117,13 @@
         .nav-cta:hover { background: #333; transform: translateY(-1px); }
 
         .lang-switch { display: flex; gap: 8px; font-family: var(--font-display); font-size: 0.8rem; font-weight: 600; }
-        .lang-btn {
-            background: transparent; border: none; color: var(--text-subtitle); cursor: pointer; padding: 0;
-        }
+        .lang-btn { background: transparent; border: none; color: var(--text-subtitle); cursor: pointer; padding: 0; }
         .lang-btn.active { color: var(--text-luminous); text-decoration: underline; }
 
         main {
             width: 100%;
             max-width: 1000px;
-            padding: 140px 24px 120px; /* Padding top compensates for fixed nav */
+            padding: 140px 24px 120px;
             display: flex;
             flex-direction: column;
             gap: 160px;
@@ -142,95 +136,82 @@
             display: flex; justify-content: center; align-items: center;
             text-align: center;
         }
-
         .hero-content { max-width: 800px; }
 
-        /* FOUNDER PROFILE - Clean & Professional */
-        .founder-section {
-            display: flex; flex-direction: column; align-items: center; margin-bottom: 32px;
-        }
+        .founder-section { display: flex; flex-direction: column; align-items: center; margin-bottom: 32px; }
         .profile-wrapper {
             position: relative; margin-bottom: 24px; 
-            width: 160px; height: 160px;
+            width: 150px; height: 150px;
             border-radius: 50%;
             padding: 4px;
             background: #fff;
             box-shadow: var(--shadow-hover);
         }
-        .profile-img {
-            width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
-            display: block; 
-        }
+        .profile-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; }
         
         .founder-label {
             font-family: var(--font-display); font-size: 0.8rem; text-transform: uppercase;
-            letter-spacing: 0.15em; color: var(--text-subtitle); font-weight: 600; margin-top: 16px;
+            letter-spacing: 0.15em; color: var(--accent-gold); font-weight: 700; margin-top: 8px;
         }
 
         h1 {
             font-family: var(--font-display);
-            font-size: clamp(3rem, 6vw, 5rem);
+            font-size: clamp(3rem, 6vw, 4.5rem);
             font-weight: 800;
-            line-height: 1.05;
+            line-height: 1.1;
             color: var(--text-luminous);
             margin-bottom: 24px;
             letter-spacing: -0.04em;
         }
 
-        .highlight-text { color: var(--accent-highlight); }
+        .highlight-text { 
+            color: var(--accent-highlight); 
+            position: relative; display: inline-block;
+        }
 
         .hero p {
-            font-family: var(--font-body); font-size: 1.35rem; color: var(--text-dim);
+            font-family: var(--font-body); font-size: 1.3rem; color: var(--text-dim);
             font-weight: 300; line-height: 1.6; max-width: 700px; margin: 0 auto 40px;
         }
         
         .hero-btn {
             padding: 16px 40px; background: var(--text-luminous); color: #fff;
-            border-radius: 50px;
-            font-family: var(--font-display); font-weight: 600; font-size: 0.95rem;
+            border-radius: 50px; font-family: var(--font-display); font-weight: 600; font-size: 0.95rem;
             text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.15);
+            transition: all 0.3s ease; box-shadow: 0 10px 20px -5px rgba(0,0,0,0.15);
         }
         .hero-btn:hover { background: #333; transform: translateY(-2px); }
 
-        /* --- SECTIONS --- */
+        /* --- BENTO GRID --- */
         .section-header { 
             margin-bottom: 60px; text-align: left; 
-            border-top: 1px solid var(--text-luminous); /* Línea fuerte */
-            padding-top: 24px;
+            border-top: 1px solid var(--text-luminous); padding-top: 24px;
             display: flex; justify-content: space-between; align-items: baseline;
         }
         .section-title { 
             font-family: var(--font-display); font-size: 1rem; font-weight: 700;
             color: var(--text-luminous); text-transform: uppercase; letter-spacing: 0.05em;
         }
-        .section-subtitle { 
-            font-family: var(--font-body); color: var(--text-subtitle); font-style: italic; font-size: 1.1rem;
-        }
+        .section-subtitle { font-family: var(--font-body); color: var(--text-subtitle); font-style: italic; font-size: 1.1rem; }
 
-        /* --- BENTO GRID --- */
         .bento-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
         .glass-card {
             background: var(--surface-card); border: 1px solid var(--border-light);
             border-radius: 12px; padding: 32px; transition: all 0.3s ease;
-            display: flex; flex-direction: column; height: 100%;
-            box-shadow: var(--shadow-soft);
+            display: flex; flex-direction: column; height: 100%; box-shadow: var(--shadow-soft);
         }
         .glass-card:hover { border-color: var(--border-hover); transform: translateY(-4px); box-shadow: var(--shadow-hover); }
         
-        .card-title { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; margin-bottom: 12px; color: var(--text-luminous); letter-spacing: -0.02em; }
-        .card-desc { color: var(--text-dim); font-size: 1.05rem; line-height: 1.6; font-weight: 400; margin-bottom: 24px; flex-grow: 1; }
+        .card-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; margin-bottom: 12px; color: var(--text-luminous); }
+        .card-desc { color: var(--text-dim); font-size: 1rem; line-height: 1.6; font-weight: 400; margin-bottom: 24px; flex-grow: 1; }
         .feature-tags { display: flex; flex-wrap: wrap; gap: 8px; }
         .tag { 
-            font-family: var(--font-display); font-size: 0.75rem; font-weight: 600; padding: 6px 12px; 
-            color: var(--text-luminous); background: var(--bg-mid);
-            border: 1px solid var(--border-hover); border-radius: 4px; 
+            font-family: var(--font-display); font-size: 0.7rem; font-weight: 600; padding: 6px 12px; 
+            color: var(--text-luminous); background: var(--bg-mid); border: 1px solid var(--border-hover); border-radius: 4px; 
         }
 
-        /* --- EXPERIENCE SECTION --- */
+        /* --- EXPERIENCE --- */
         .xp-wrapper { width: 100%; }
-        
         .xp-category-title {
             font-family: var(--font-display); font-size: 1.5rem; color: var(--text-luminous);
             margin: 80px 0 40px; font-weight: 700; letter-spacing: -0.03em;
@@ -242,29 +223,21 @@
             transition: all 0.3s ease;
         }
         .xp-card:hover { background: var(--bg-mid); border-radius: 12px; }
-        
-        /* ELIT Card Highlight */
         .xp-card.featured { 
-            background: #fff;
-            border: 1px solid var(--border-light);
-            border-radius: 12px;
-            box-shadow: var(--shadow-hover);
+            background: #fff; border: 1px solid var(--border-light); border-radius: 12px; box-shadow: var(--shadow-hover);
         }
         
         .xp-header { margin-bottom: 20px; display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px;}
-        .xp-role { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: var(--text-luminous); display: block; margin-bottom: 4px; letter-spacing: -0.03em; }
-        .xp-company { color: var(--text-dim); font-weight: 500; font-size: 1.1rem; font-family: var(--font-body); font-style: italic; }
+        .xp-role { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--text-luminous); display: block; margin-bottom: 4px; }
+        .xp-company { color: var(--text-dim); font-weight: 500; font-size: 1rem; font-family: var(--font-body); font-style: italic; }
         .xp-date { 
             font-family: var(--font-display); font-size: 0.8rem; color: var(--text-luminous); font-weight: 600;
         }
-        
         .xp-desc { color: var(--text-dim); line-height: 1.8; font-size: 1.1rem; margin-bottom: 24px; max-width: 800px; }
 
         /* Engagements */
         .engagement-list { display: grid; gap: 40px; margin-top: 40px; }
-        .engagement-item { 
-            border-top: 1px solid var(--border-light); padding-top: 24px; 
-        }
+        .engagement-item { border-top: 1px solid var(--border-light); padding-top: 24px; }
         
         .eng-title { color: var(--text-luminous); font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; margin-bottom: 8px; }
         .eng-tag { 
@@ -289,15 +262,14 @@
         }
         .xp-link:hover { border-bottom-color: var(--accent-highlight); }
 
-        /* Verified Image - HD & Large */
+        /* Verified Image */
         .verified-image-container { margin-top: 32px; display: block; width: 100%; }
         .verified-badge { 
             display: inline-block; margin-bottom: 12px; color: var(--accent-gold); 
             font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; 
         }
         .verified-img { 
-            width: 100%; max-width: 100%; /* Ocupa todo el ancho disponible */
-            height: auto; display: block; border-radius: 8px; 
+            width: 100%; max-width: 100%; height: auto; display: block; border-radius: 8px; 
             box-shadow: var(--shadow-hover); border: 1px solid var(--border-light);
             transition: transform 0.3s ease;
         }
@@ -305,11 +277,10 @@
 
         /* --- CERTIFICATIONS --- */
         .cred-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
-        
         .cred-card {
             background: #fff; border: 1px solid var(--border-light);
             padding: 24px; transition: 0.3s; height: 100%; display: flex; flex-direction: column;
-            border-radius: 8px;
+            border-radius: 12px; box-shadow: var(--shadow-soft);
         }
         .cred-card:hover { border-color: var(--text-luminous); }
         
@@ -319,13 +290,12 @@
         
         .cred-title { font-size: 1rem; color: var(--text-luminous); font-weight: 700; font-family: var(--font-display); line-height: 1.3; }
         .cred-org { font-size: 0.85rem; color: var(--text-subtitle); margin-top: 4px; }
-        
         .cred-skills { margin-top: auto; display: flex; flex-wrap: wrap; gap: 8px; pt: 16px; border-top: 1px solid var(--border-light); }
         .skill-pill { font-size: 0.7rem; color: var(--text-dim); background: var(--bg-mid); padding: 4px 10px; border-radius: 4px; font-weight: 600; border: 1px solid var(--border-light); }
 
-        /* --- FOOTER CTA --- */
+        /* --- CTA --- */
         .power-cta { margin-top: 120px; padding-top: 60px; border-top: 1px solid var(--border-light); text-align: left; }
-        .cta-title { font-size: 2.5rem; font-family: var(--font-display); font-weight: 700; color: var(--text-luminous); margin-bottom: 24px; letter-spacing: -0.03em; }
+        .cta-title { font-size: 2.5rem; font-family: var(--font-display); font-weight: 700; color: var(--text-luminous); margin-bottom: 24px; }
         .cta-desc { color: var(--text-dim); font-size: 1.2rem; max-width: 600px; margin-bottom: 40px; font-weight: 300; line-height: 1.6; }
 
         footer { padding: 40px 0; border-top: 1px solid var(--border-light); margin-top: 60px; color: var(--text-subtitle); font-size: 0.8rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
@@ -336,7 +306,7 @@
         @media (max-width: 768px) {
             h1 { font-size: 2.8rem; }
             .section-header { flex-direction: column; gap: 8px; }
-            nav { padding: 12px 20px; justify-content: space-between; }
+            nav { padding: 12px 20px; }
             .desktop-links { display: none; }
             .nav-left { flex-grow: 1; }
             .nav-cta { padding: 8px 16px; font-size: 0.75rem; }
@@ -349,11 +319,11 @@
     <nav>
         <div class="nav-left">
             <div class="logo-wrapper">
-                <!-- LOGO CORREGIDO CON ESPACIOS CODIFICADOS -->
-                <img src="Background%20Eraser%20(1).jpeg" alt="ELIT Logo" class="nav-logo-img" onerror="this.style.display='none'; document.querySelector('.logo-fallback').style.display='block'">
-                <div class="logo-fallback" style="display:none; font-weight:800;">E</div>
+                <!-- LOGO CONFIGURADO: Background Eraser (1).jpg -->
+                <img src="Background%20Eraser%20(1).jpg" alt="ELIT Logo" class="nav-logo-img" onerror="this.style.display='none'; document.querySelector('.logo-fallback').style.display='block'">
+                <div class="logo-fallback" style="display:none; font-weight:800; font-family:var(--font-display); font-size:1.8rem; text-align:center; line-height:48px; color:var(--accent-blue);">E</div>
             </div>
-            <span class="nav-brand">ELIT <span style="font-weight:400; color:var(--text-subtitle);">Data Systems</span></span>
+            <span class="nav-brand" style="margin-left: 12px;">ELIT <span style="font-weight:400; color:var(--text-subtitle);">Data Systems</span></span>
         </div>
         
         <div class="desktop-links">
@@ -378,8 +348,9 @@
             
             <div class="founder-section">
                 <div class="profile-wrapper">
-                    <!-- FOTO PERFIL: Asegúrate que el archivo se llame EXACTAMENTE así -->
-                    <img src="FF230941-48C7-4D41-94CB-BBCBFEA69D67.jpg" alt="Efrain Gomez" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?name=Efrain+Gomez&background=0f172a&color=fff&size=200'">
+                    <!-- FOTO DE PERFIL CORREGIDA: FF... .png -->
+                    <img src="FF230941-48C7-4D41-94CB-BBCBFEA69D67.png" alt="Efrain Gomez" class="profile-img" onerror="this.style.display='none'; document.querySelector('.founder-fallback').style.display='block'">
+                    <div class="founder-fallback" style="display:none; width:100%; height:100%; border-radius:50%; background:#eee; text-align:center; line-height:150px; font-weight:bold; color:#ccc;">EG</div>
                 </div>
                 <span class="founder-label">Efrain Gomez</span>
             </div>
@@ -406,7 +377,6 @@
             </div>
 
             <div class="bento-grid">
-                <!-- Data Engineering -->
                 <div class="glass-card">
                     <h3 class="card-title" data-key="card1_title">Data Engineering</h3>
                     <p class="card-desc" data-key="card1_desc">Designing the backbone. Robust ETL pipelines and scalable Data Lakes that ensure data integrity at the source.</p>
@@ -417,7 +387,6 @@
                     </div>
                 </div>
 
-                <!-- Automation -->
                 <div class="glass-card">
                     <h3 class="card-title" data-key="card2_title">Process Automation</h3>
                     <p class="card-desc" data-key="card2_desc">Eliminating friction. Deploying autonomous agents and NLP models to handle repetitive, high-volume tasks.</p>
@@ -428,7 +397,6 @@
                     </div>
                 </div>
 
-                <!-- Strategic Analytics -->
                 <div class="glass-card">
                     <h3 class="card-title" data-key="card3_title">Strategic Analytics</h3>
                     <p class="card-desc" data-key="card3_desc">Driving decisions. Predictive modeling and dashboards that answer the "so what?" behind the data.</p>
@@ -457,7 +425,6 @@
                     Partnering with organizations to architect data systems that scale. Focusing on high-impact, short-term implementation with long-term value.
                 </p>
 
-                <!-- ENGAGEMENTS -->
                 <div class="engagement-list">
                     
                     <!-- Red Raccoon -->
@@ -482,7 +449,7 @@
                             <li data-key="eng_uni_li2">Analyzed +11k records via NLP to diagnose student retention issues.</li>
                         </ul>
                         
-                        <!-- IMAGEN VIVIANA CORREGIDA Y OPTIMIZADA -->
+                        <!-- TESTIMONIO VIVIANA -->
                         <div class="verified-image-container">
                             <span class="verified-badge">Client Endorsement</span>
                             <img src="Viviana%20Ingeniera%20ambiental.PNG" alt="Testimonial Unisalle" class="verified-img" onerror="this.style.display='none'">
@@ -507,7 +474,6 @@
 
             <div class="xp-category-title" data-key="cat_corporate">Corporate Background</div>
 
-            <!-- Previous Roles -->
             <div class="xp-card">
                 <div class="xp-header">
                     <div>
