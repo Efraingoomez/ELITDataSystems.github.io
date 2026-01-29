@@ -123,8 +123,8 @@
         main {
             width: 100%;
             max-width: 1000px;
-            /* AUMENTADO: Padding top de 140px a 200px para bajar el contenido */
-            padding: 200px 24px 120px;
+            /* AJUSTADO: Reducido padding top de main ya que el Hero tiene su propio espacio ahora */
+            padding: 40px 24px 120px;
             display: flex;
             flex-direction: column;
             gap: 160px;
@@ -136,6 +136,9 @@
         .hero-container {
             display: flex; justify-content: center; align-items: center;
             text-align: center;
+            /* CRÍTICO: Padding superior para bajar la foto y evitar que el nav la tape */
+            padding-top: 180px;
+            padding-bottom: 60px;
         }
         .hero-content { max-width: 800px; }
 
