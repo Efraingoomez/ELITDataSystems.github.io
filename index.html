@@ -60,26 +60,28 @@
         nav {
             position: fixed;
             top: 20px;
-            padding: 12px 32px;
-            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 24px;
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--border-light);
             border-radius: 100px;
             z-index: 100;
             display: flex;
-            gap: 40px;
+            gap: 24px;
             align-items: center;
             transition: all 0.4s ease;
             box-shadow: var(--shadow-soft);
+            max-width: 90%;
         }
         nav:hover { box-shadow: var(--shadow-hover); border-color: var(--border-hover); }
         
         /* Logo Styling in Nav */
         .logo-wrapper {
             display: flex; align-items: center; justify-content: center;
-            height: 40px; width: 40px; border-radius: 50%; overflow: hidden;
-            background: #000; /* Fondo oscuro para que el logo resalte si es blanco/transparente */
+            height: 44px; width: 44px; border-radius: 50%; overflow: hidden;
+            background: #fff; 
+            border: 1px solid var(--border-light);
         }
         .nav-logo-img {
             width: 100%; height: 100%; object-fit: contain;
@@ -91,10 +93,11 @@
             font-weight: 700; 
             font-size: 1rem; 
             letter-spacing: 0.02em;
-            margin-right: auto; /* Push links to right if needed */
+            margin-right: auto;
+            white-space: nowrap;
         }
         
-        .desktop-links { display: flex; gap: 32px; align-items: center; }
+        .desktop-links { display: flex; gap: 24px; align-items: center; }
 
         .nav-link {
             color: var(--text-subtitle);
@@ -119,10 +122,11 @@
             font-weight: 600;
             text-decoration: none;
             transition: transform 0.2s, background 0.3s;
+            white-space: nowrap;
         }
         .nav-cta:hover { background: var(--accent-blue); transform: translateY(-1px); }
 
-        .lang-switch { display: flex; gap: 8px; margin-left: 20px; padding-left: 20px; border-left: 1px solid var(--border-light); }
+        .lang-switch { display: flex; gap: 8px; margin-left: 10px; padding-left: 10px; border-left: 1px solid var(--border-light); }
         .lang-btn {
             background: transparent; border: none; color: var(--text-subtitle);
             padding: 0; font-family: var(--font-display); font-size: 0.7rem; font-weight: 600;
@@ -161,10 +165,8 @@
             box-shadow: var(--shadow-soft);
         }
         .profile-img {
-            width: 130px; height: 130px; border-radius: 50%; object-fit: cover;
+            width: 140px; height: 140px; border-radius: 50%; object-fit: cover;
             display: block; 
-            /* Se ve profesional en color, pero si quieres B&N descomenta el filtro */
-            /* filter: grayscale(100%); transition: filter 0.5s ease; */
         }
         
         .founder-label {
@@ -313,9 +315,9 @@
             border: 1px solid var(--accent-gold); padding: 4px 8px; border-radius: 4px;
         }
         .verified-img { 
-            width: 100%; max-width: 800px; /* Tamaño aumentado significativamente */
+            width: 100%; max-width: 900px; /* Tamaño aumentado para HD */
             height: auto; display: block; border-radius: 8px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid var(--border-light);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1); border: 1px solid var(--border-light);
             transition: transform 0.3s ease;
         }
         .verified-img:hover { transform: scale(1.01); }
@@ -354,8 +356,9 @@
             h1 { font-size: 2.5rem; }
             .xp-card { padding: 24px; }
             .section-header { flex-direction: column; gap: 8px; }
-            nav { padding: 10px 20px; gap: 20px; }
+            nav { padding: 10px 20px; gap: 16px; justify-content: space-between; }
             .desktop-links { display: none; } /* En móvil simplificamos */
+            .nav-brand { margin-right: 0; }
             .verified-img { width: 100%; }
         }
     </style>
@@ -364,7 +367,8 @@
 
     <nav>
         <div class="logo-wrapper">
-            <img src="Background Eraser (1).jpg" alt="ELIT Logo" class="nav-logo-img">
+            <!-- LOGO ACTUALIZADO: Nombre exacto del archivo -->
+            <img src="Background Eraser (1).jpg" alt="ELIT Logo" class="nav-logo-img" onerror="this.style.display='none'">
         </div>
         <span class="nav-brand" style="margin-left: 12px;">ELIT <span style="font-weight:400; color:var(--text-subtitle);">Data Systems</span></span>
         
@@ -374,6 +378,7 @@
             <a href="#credentials" class="nav-link" data-key="nav_certs">Authority</a>
         </div>
         
+        <!-- BOTÓN CONTACTAR -->
         <a href="https://wa.me/3025141055" class="nav-cta" data-key="cta_btn">Contactar</a>
 
         <div class="lang-switch">
@@ -389,8 +394,8 @@
             
             <div class="founder-section">
                 <div class="profile-wrapper">
-                    <!-- FOTO DEL FUNDADOR ACTUALIZADA -->
-                    <img src="FF230941-48C7-4D41-94CB-BBCBFEA69D67.jpg" alt="Efrain Gomez" class="profile-img">
+                    <!-- FOTO DEL FUNDADOR ACTUALIZADA: Nombre exacto del archivo -->
+                    <img src="FF230941-48C7-4D41-94CB-BBCBFEA69D67.jpg" alt="Efrain Gomez" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?name=Efrain+Gomez&background=0f172a&color=fff&size=200'">
                 </div>
                 <span class="founder-label">Efrain Gomez</span>
             </div>
@@ -494,8 +499,8 @@
                         </ul>
                         <div class="verified-image-container">
                             <span class="verified-badge">Client Endorsement</span>
-                            <!-- IMAGEN DE VIVIANA AGRANDADA Y EN HD -->
-                            <img src="Viviana Ingeniera ambiental.PNG" alt="Testimonial Unisalle" class="verified-img">
+                            <!-- IMAGEN DE VIVIANA ACTUALIZADA: Nombre exacto del archivo -->
+                            <img src="Viviana Ingeniera ambiental.PNG" alt="Testimonial Unisalle" class="verified-img" onerror="this.style.display='none'">
                         </div>
                     </div>
 
