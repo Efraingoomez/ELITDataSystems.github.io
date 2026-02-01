@@ -67,19 +67,21 @@
             background: rgba(255, 255, 255, 0.90);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-strong);
-            z-index: 1000; padding: 16px 0;
+            z-index: 1000; padding: 12px 0;
             box-shadow: 0 4px 20px rgba(0,0,0,0.03);
         }
         .nav-content { display: flex; justify-content: space-between; align-items: center; }
         
         .logo { 
             font-family: var(--font-sans); font-weight: 900; font-size: 1.5rem; 
-            color: var(--primary-dark); letter-spacing: -0.05em; display: flex; align-items: center; gap: 10px;
+            color: var(--primary-dark); letter-spacing: -0.05em; display: flex; align-items: center; gap: 12px;
         }
         .logo-box { 
-            background: var(--primary-dark); color: #fff; width: 40px; height: 40px; 
-            display: flex; align-items: center; justify-content: center; border-radius: 8px;
+            background: var(--primary-dark); color: #fff; 
+            width: 56px; height: 56px; /* AUMENTADO PARA MAYOR VISIBILIDAD */
+            display: flex; align-items: center; justify-content: center; border-radius: 10px;
             overflow: hidden; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
         .logo-img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -648,7 +650,7 @@
         <a href="https://wa.me/573025141055" target="_blank" class="wa-pill-btn">
             <div class="wa-text-group">
                 <span class="wa-label-top" data-key="wa_top">Online Now</span>
-                <span class="wa-label-main" data-key="wa_main">Let's Talk Data Strategy</span>
+                <span class="wa-label-main" data-key="wa_main">Speak with Lead Engineer</span>
             </div>
             <div class="wa-icon-circle">
                 <!-- ICONO TELEFONO (Phone Icon) -->
@@ -707,7 +709,7 @@
                 auth_header: "Certified Authority",
                 bio: "I understand the code AND the money. I build systems that don't just 'work' technically, but drive measurable financial growth.",
                 btn_cv: "Download Full CV",
-                wa_top: "Online Now", wa_main: "Let's Talk Data Strategy"
+                wa_top: "Online Now", wa_main: "Speak with Lead Engineer"
             },
             es: {
                 nav_impact: "Impacto", nav_svc: "Soluciones", nav_exp: "Experiencia", nav_contact: "Agendar Llamada",
@@ -743,7 +745,7 @@
                 auth_header: "Autoridad Certificada",
                 bio: "Entiendo el código Y el dinero. Construyo sistemas que no solo 'funcionan' técnicamente, sino que impulsan crecimiento financiero medible.",
                 btn_cv: "Descargar CV Completo",
-                wa_top: "En Línea", wa_main: "Diseñemos tu Estrategia"
+                wa_top: "En Línea", wa_main: "Hablar con el Ingeniero"
             }
         };
 
