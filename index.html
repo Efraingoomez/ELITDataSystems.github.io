@@ -78,7 +78,7 @@
         }
         .logo-box { 
             background: var(--primary-dark); color: #fff; 
-            width: 56px; height: 56px; /* AUMENTADO PARA MAYOR VISIBILIDAD */
+            width: 56px; height: 56px; 
             display: flex; align-items: center; justify-content: center; border-radius: 10px;
             overflow: hidden; 
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -129,6 +129,7 @@
             background: var(--primary-blue); color: white; padding: 16px 40px; border-radius: 8px;
             text-decoration: none; font-weight: 700; font-size: 1.1rem;
             box-shadow: 0 4px 15px rgba(3, 105, 161, 0.3); transition: transform 0.2s;
+            border: none; cursor: pointer;
         }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(3, 105, 161, 0.4); }
         
@@ -165,11 +166,9 @@
             display: grid; 
             gap: 32px; 
             margin-bottom: 120px;
-            /* Móvil: 1 columna */
             grid-template-columns: 1fr;
         }
 
-        /* Desktop: Forzar 2 columnas simétricas para evitar espacios vacíos */
         @media (min-width: 768px) {
             .services-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -269,7 +268,22 @@
             font-size: 1.1rem; font-weight: 700; color: var(--primary-dark); 
             display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
         }
-        .elit-proj-desc { font-size: 0.9rem; color: var(--text-main); line-height: 1.6; padding-left: 2px; }
+        .elit-proj-desc { font-size: 0.9rem; color: var(--text-main); line-height: 1.6; padding-left: 2px; margin-bottom: 16px;}
+
+        /* SECURE BUTTON STYLE */
+        .btn-secure {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #f1f5f9; color: var(--text-muted);
+            padding: 8px 16px; border-radius: 6px;
+            font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+            text-decoration: none; border: 1px solid var(--border-subtle);
+            transition: all 0.2s; cursor: pointer;
+        }
+        .btn-secure:hover {
+            background: var(--primary-dark); color: white; border-color: var(--primary-dark);
+        }
+        .btn-secure svg { width: 14px; height: 14px; fill: currentColor; }
+
 
         /* Estilo para métricas de otros trabajos */
         .xp-impact-box { 
@@ -316,6 +330,55 @@
         }
         
         .cert-name { font-size: 0.65rem; font-weight: 600; color: var(--text-muted); text-align: center; line-height: 1.2; margin-top: 4px;}
+
+        /* TESTIMONIALS SECTION */
+        .testimonial-section {
+            margin-bottom: 100px;
+        }
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+        .testimonial-img {
+            width: 100%;
+            border-radius: 12px;
+            border: 1px solid var(--border-subtle);
+            box-shadow: var(--shadow-card);
+            transition: transform 0.3s;
+        }
+        .testimonial-img:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-premium);
+        }
+
+
+        /* --- PASSWORD MODAL --- */
+        .modal {
+            display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(15, 23, 42, 0.8); backdrop-filter: blur(5px);
+            align-items: center; justify-content: center;
+        }
+        .modal-content {
+            background-color: white; padding: 40px; border-radius: 16px;
+            width: 90%; max-width: 400px; text-align: center;
+            box-shadow: var(--shadow-premium); border: 1px solid var(--border-strong);
+            position: relative;
+        }
+        .modal-close {
+            position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; color: var(--text-muted);
+        }
+        .modal h3 { color: var(--primary-dark); margin-bottom: 12px; }
+        .modal p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px; }
+        .modal input {
+            width: 100%; padding: 12px; border: 1px solid var(--border-strong); border-radius: 8px;
+            margin-bottom: 16px; font-size: 1rem; text-align: center; letter-spacing: 4px;
+        }
+        .modal button {
+            width: 100%; padding: 12px; background: var(--primary-blue); color: white;
+            border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 1rem;
+        }
+        .error-msg { color: #ef4444; font-size: 0.85rem; margin-top: 10px; display: none; }
 
         /* --- PREMIUM WHATSAPP WIDGET --- */
         .wa-premium-widget {
@@ -389,11 +452,22 @@
 </head>
 <body>
 
+    <!-- PASSWORD MODAL -->
+    <div id="pwdModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <h3>Confidential Access</h3>
+            <p>This report is protected. Please enter the access code.</p>
+            <input type="password" id="pwdInput" placeholder="Code">
+            <button onclick="checkPassword()">Unlock Document</button>
+            <p id="errorMsg" class="error-msg">Incorrect access code.</p>
+        </div>
+    </div>
+
     <nav>
         <div class="container nav-content">
             <div class="logo">
                 <div class="logo-box">
-                    <!-- LOGO EMPRESA ACTUALIZADO -->
                     <img src="Background%20Eraser%20(1).jpeg" alt="E Logo" class="logo-img" onerror="this.style.display='none'; this.parentNode.innerHTML='E'">
                 </div>
                 <span style="margin-left: 10px;">ELIT Data Systems</span>
@@ -530,19 +604,40 @@
                     <p class="xp-desc" data-key="elit_intro">Leading a Data Engineering and AI consultancy, bridging the gap between technical implementation (Python, ETL) and business strategy. Clients trust my ability to transform complex data into operational and financial growth.</p>
                     
                     <div class="elit-projects">
+                        <!-- PROJECT 1: KIGGU -->
                         <div class="elit-project-item">
                             <span class="elit-proj-name" data-key="proj_1_title">🔍 KIGGU | Data Archaeology</span>
                             <div class="elit-proj-desc" data-key="proj_1_desc">Recovered a critical asset of 20 years of "lost" and disorganized data. Designed Python + AI pipelines for massive cleaning and structuring of +1,200 raw files. Presented predictive models (Scikit-learn) to the C-Suite, grounding strategic decisions on recovered historical evidence.</div>
+                            
+                            <!-- SECURE BUTTON -->
+                            <button class="btn-secure" onclick="openSecureFile('Analisis Cientifico Kiggu.pdf')">
+                                <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                                <span data-key="btn_secure">View Confidential Report</span>
+                            </button>
                         </div>
 
+                        <!-- PROJECT 2: RED RACCOON -->
                         <div class="elit-project-item">
                             <span class="elit-proj-name" data-key="proj_2_title">🌎 RED RACCOON ART HOUSE (USA)</span>
                             <div class="elit-proj-desc" data-key="proj_2_desc">Designed the integral Sales, Operations, and Strategy architecture for brand expansion in Orlando, FL. Executed data-driven competitive analysis and built executive dashboards for real-time profitability monitoring.</div>
+                            
+                            <!-- SECURE BUTTON -->
+                            <button class="btn-secure" onclick="openSecureFile('Plan de Crecimiento & Go-to-Market 2026.pdf')">
+                                <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                                <span data-key="btn_secure">View Confidential Report</span>
+                            </button>
                         </div>
 
+                        <!-- PROJECT 3: LA SALLE -->
                         <div class="elit-project-item">
                             <span class="elit-proj-name" data-key="proj_3_title">🎓 UNIVERSIDAD DE LA SALLE</span>
                             <div class="elit-proj-desc" data-key="proj_3_desc">Selected to lead 3 consecutive initiatives: NLP Analytics to process +11,000 records and diagnose attrition, Automation of the "A Rodar Unisalle" ecosystem, and Design of the automated degree management system.</div>
+                            
+                            <!-- SECURE BUTTON -->
+                            <button class="btn-secure" onclick="openSecureFile('Datos NLP la Salle.pdf')">
+                                <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                                <span data-key="btn_secure">View Confidential Report</span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -607,7 +702,8 @@
                     I understand the code AND the money. I build systems that don't just "work" technically, but drive measurable financial growth.
                 </p>
 
-                <a href="CV_Efrain_Gomez_Revenue_Operations_Data_Engineer.pdf" download class="btn-primary" style="width:100%; display:block; padding:12px; font-size:0.9rem;" data-key="btn_cv">Download Full CV</a>
+                <!-- CV PROTEGIDO CON CONTRASEÑA -->
+                <button class="btn-primary" style="width:100%; display:block; padding:12px; font-size:0.9rem; cursor:pointer; border:none;" onclick="openSecureFile('CV_Efrain_Gomez_Revenue_Operations_Data_Engineer.pdf')" data-key="btn_cv">Download Full CV</button>
             </div>
 
             <!-- CERTIFIED AUTHORITY SECTION (EXACT FILENAMES UPDATED) -->
@@ -645,6 +741,19 @@
 
     </section>
 
+    <!-- NEW SECTION: TESTIMONIALS/ENDORSEMENTS -->
+    <section class="container testimonial-section">
+        <div class="section-header">
+            <h2 class="section-title" data-key="testi_title">Client Endorsements</h2>
+            <p class="section-desc" data-key="testi_desc">Trusted by industry professionals to deliver complex automation and data solutions.</p>
+        </div>
+        <div class="testimonial-grid">
+            <div class="testimonial-item">
+                <img src="Viviana Ingeniera ambiental.PNG" alt="Testimonial Viviana Pardo" class="testimonial-img">
+            </div>
+        </div>
+    </section>
+
     <!-- PREMIUM WHATSAPP WIDGET (UPDATED ICON & TEXT) -->
     <div class="wa-premium-widget">
         <a href="https://wa.me/573025141055" target="_blank" class="wa-pill-btn">
@@ -674,6 +783,49 @@
     </footer>
 
     <script>
+        // --- PASSWORD LOGIC ---
+        let currentFile = '';
+
+        function openSecureFile(filename) {
+            currentFile = filename;
+            document.getElementById('pwdModal').style.display = 'flex';
+            document.getElementById('errorMsg').style.display = 'none';
+            document.getElementById('pwdInput').value = '';
+            document.getElementById('pwdInput').focus();
+        }
+
+        function closeModal() {
+            document.getElementById('pwdModal').style.display = 'none';
+            currentFile = '';
+        }
+
+        function checkPassword() {
+            const input = document.getElementById('pwdInput').value;
+            // PASSWORD IS SET TO 005 HERE
+            if(input === '005') {
+                window.open(currentFile, '_blank');
+                closeModal();
+            } else {
+                document.getElementById('errorMsg').style.display = 'block';
+            }
+        }
+
+        // Close modal if clicked outside
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('pwdModal')) {
+                closeModal();
+            }
+        }
+
+        // Allow Enter key to submit
+        document.getElementById("pwdInput").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                checkPassword();
+            }
+        });
+
+
+        // --- TRANSLATION LOGIC ---
         const translations = {
             en: {
                 nav_impact: "Impact", nav_svc: "Solutions", nav_exp: "Expertise", nav_contact: "Strategy Call",
@@ -699,6 +851,7 @@
                 proj_2_desc: "Designed the integral Sales, Operations, and Strategy architecture for brand expansion in Orlando, FL. Executed data-driven competitive analysis and built executive dashboards for real-time profitability monitoring.",
                 proj_3_title: "🎓 UNIVERSIDAD DE LA SALLE",
                 proj_3_desc: "Selected to lead 3 consecutive initiatives: NLP Analytics to process +11,000 records and diagnose attrition, Automation of the 'A Rodar Unisalle' ecosystem, and Design of the automated degree management system.",
+                btn_secure: "View Confidential Report",
 
                 tend_txt: "Merged sales execution with Business Intelligence, designing a Data-Driven strategy to maximize resource allocation and optimize the sales cycle.",
                 tend_imp: "Top 5 globally among 94 executives. Achieved all-time sales record through algorithmic lead prioritization.",
@@ -709,7 +862,10 @@
                 auth_header: "Certified Authority",
                 bio: "I understand the code AND the money. I build systems that don't just 'work' technically, but drive measurable financial growth.",
                 btn_cv: "Download Full CV",
-                wa_top: "Online Now", wa_main: "Speak with Lead Engineer"
+                wa_top: "Online Now", wa_main: "Speak with Lead Engineer",
+
+                testi_title: "Client Endorsements",
+                testi_desc: "Trusted by industry professionals to deliver complex automation and data solutions."
             },
             es: {
                 nav_impact: "Impacto", nav_svc: "Soluciones", nav_exp: "Experiencia", nav_contact: "Agendar Llamada",
@@ -735,6 +891,7 @@
                 proj_2_desc: "Diseño de arquitectura integral de Ventas, Operaciones y Estrategia para expansión de marca en Orlando, FL. Ejecución de análisis competitivo basado en datos y construcción de dashboards ejecutivos para monitoreo de rentabilidad en tiempo real.",
                 proj_3_title: "🎓 UNIVERSIDAD DE LA SALLE",
                 proj_3_desc: "Seleccionado para liderar 3 iniciativas consecutivas: Analítica NLP para procesar +11,000 registros y diagnosticar deserción, Automatización del ecosistema 'A Rodar Unisalle', y Diseño del sistema automatizado de gestión de grados.",
+                btn_secure: "Ver Reporte Confidencial",
 
                 tend_txt: "Fusión de ejecución de ventas con Business Intelligence, diseñando una estrategia Data-Driven para maximizar la asignación de recursos y optimizar el ciclo de ventas.",
                 tend_imp: "Top 5 global entre 94 ejecutivos. Récord histórico de ventas mediante priorización algorítmica de leads.",
@@ -745,7 +902,10 @@
                 auth_header: "Autoridad Certificada",
                 bio: "Entiendo el código Y el dinero. Construyo sistemas que no solo 'funcionan' técnicamente, sino que impulsan crecimiento financiero medible.",
                 btn_cv: "Descargar CV Completo",
-                wa_top: "En Línea", wa_main: "Hablar con el Ingeniero"
+                wa_top: "En Línea", wa_main: "Hablar con el Ingeniero",
+
+                testi_title: "Aval de Clientes",
+                testi_desc: "Profesionales de la industria confían en nosotros para entregar soluciones complejas de datos y automatización."
             }
         };
 
