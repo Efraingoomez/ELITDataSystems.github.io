@@ -340,8 +340,15 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 32px;
         }
+        /* MODIFICADO PARA ALTA DEFINICIÓN */
+        .testimonial-item {
+            display: flex;
+            justify-content: center; /* Centrar la imagen */
+        }
         .testimonial-img {
-            width: 100%;
+            width: auto; /* Evita que se estire más allá de su tamaño real */
+            max-width: 100%; /* Asegura que sea responsive en móviles */
+            height: auto;
             border-radius: 12px;
             border: 1px solid var(--border-subtle);
             box-shadow: var(--shadow-card);
@@ -801,8 +808,8 @@
 
         function checkPassword() {
             const input = document.getElementById('pwdInput').value;
-            // PASSWORD IS SET TO 005 HERE
-            if(input === '005') {
+            // PASSWORD IS SET TO 5 HERE
+            if(input === '5') {
                 window.open(currentFile, '_blank');
                 closeModal();
             } else {
