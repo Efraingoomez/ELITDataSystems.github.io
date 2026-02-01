@@ -3,856 +3,738 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ELIT Data Systems - Data Authority. Data Engineering & Strategy.">
-    <meta name="theme-color" content="#ffffff">
-    <title>ELIT Data Systems | Efrain Gomez</title>
+    <meta name="description" content="ELIT Data Systems - Revenue Operations & Data Engineering. Strategic consulting for high-growth companies.">
+    <meta name="theme-color" content="#0f172a">
+    <title>ELIT Data Systems | Strategic Data Engineering</title>
     
-    <!-- Fuentes Premium -->
+    <!-- Fuentes: Inter para UI técnica, Playfair para elegancia ejecutiva -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
 
     <style>
-        /* --- SYSTEM TOKENS (Executive White) --- */
+        /* --- ENTERPRISE SYSTEM TOKENS --- */
         :root {
-            --bg-deep: #ffffff; 
-            --bg-mid: #f8fafc; /* Slate 50 */
+            --bg-body: #f8fafc; /* Slate 50 */
+            --bg-surface: #ffffff;
             
-            --surface-card: #ffffff;
-            --border-light: #e2e8f0; /* Slate 200 */
-            --border-hover: #cbd5e1; /* Slate 300 */
+            --primary-dark: #0f172a; /* Slate 900 */
+            --primary-blue: #0369a1; /* Sky 700 */
+            --accent-gold: #b45309; /* Amber 700 */
             
-            --text-luminous: #0f172a; /* Slate 900 */
-            --text-dim: #334155; /* Slate 700 */
-            --text-subtitle: #64748b; /* Slate 500 */
+            --text-main: #334155; /* Slate 700 */
+            --text-muted: #64748b; /* Slate 500 */
             
-            --accent-blue: #000000; /* Negro para acentos principales */
-            --accent-highlight: #2563eb; /* Azul corporativo para enlaces */
-            --accent-gold: #b45309; /* Dorado oscuro para toques premium */
+            --border-subtle: #e2e8f0;
+            --border-strong: #cbd5e1;
             
-            --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+            --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-glow: 0 0 20px rgba(3, 105, 161, 0.1);
+            --shadow-premium: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             
-            --font-display: 'Montserrat', sans-serif;
-            --font-body: 'Merriweather', serif;
+            --font-sans: 'Inter', sans-serif;
+            --font-serif: 'Playfair Display', serif;
             
-            --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+            --whatsapp-green: #25D366;
+            --whatsapp-dark: #128C7E;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
         
         body {
-            background-color: var(--bg-mid);
-            color: var(--text-luminous);
-            font-family: var(--font-body);
-            min-height: 100vh;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 32px 32px;
             overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-image: linear-gradient(to bottom, #ffffff 0%, var(--bg-mid) 100%);
+            line-height: 1.6;
         }
 
-        /* --- UI COMPONENTS --- */
-        
-        /* Navbar */
+        /* --- UTILITIES --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .badge {
+            display: inline-block; padding: 6px 12px; border-radius: 50px;
+            font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .badge-blue { background: #e0f2fe; color: var(--primary-blue); border: 1px solid #bae6fd; }
+        .badge-gold { background: #fef3c7; color: var(--accent-gold); border: 1px solid #fde68a; }
+
+        /* --- NAVBAR --- */
         nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 12px 40px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border-light);
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s ease;
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: rgba(255, 255, 255, 0.90);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-strong);
+            z-index: 1000; padding: 16px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
         }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; }
         
-        .nav-left { display: flex; align-items: center; gap: 16px; }
-
-        .logo-wrapper {
-            height: 40px; width: 40px; border-radius: 8px; overflow: hidden;
-            background: #fff; display: flex; align-items: center; justify-content: center;
+        .logo { 
+            font-family: var(--font-sans); font-weight: 900; font-size: 1.5rem; 
+            color: var(--primary-dark); letter-spacing: -0.05em; display: flex; align-items: center; gap: 10px;
         }
-        .nav-logo-img { width: 100%; height: 100%; object-fit: contain; }
-
-        .nav-brand { 
-            color: var(--text-luminous); 
-            font-family: var(--font-display); 
-            font-weight: 700; 
-            font-size: 1.1rem; 
-            letter-spacing: -0.02em;
+        .logo-box { 
+            background: var(--primary-dark); color: #fff; width: 40px; height: 40px; 
+            display: flex; align-items: center; justify-content: center; border-radius: 8px;
         }
-        
-        .desktop-links { display: flex; gap: 32px; align-items: center; position: absolute; left: 50%; transform: translateX(-50%); }
 
-        .nav-link {
-            color: var(--text-dim);
-            text-decoration: none;
-            font-family: var(--font-display);
-            font-size: 0.8rem;
-            font-weight: 500;
-            transition: color 0.3s;
+        .nav-links { display: flex; gap: 32px; align-items: center; }
+        .nav-item { 
+            text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.9rem;
+            transition: color 0.2s; 
         }
-        .nav-link:hover { color: var(--accent-blue); }
+        .nav-item:hover { color: var(--primary-blue); }
 
-        .nav-right { display: flex; align-items: center; gap: 20px; }
-
-        .nav-cta {
-            background: var(--text-luminous);
-            color: #fff;
-            padding: 10px 24px;
-            border-radius: 6px;
-            font-family: var(--font-display);
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s;
+        .btn-nav {
+            background: var(--primary-dark); color: #fff; padding: 10px 24px;
+            border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem;
+            transition: all 0.2s; border: 1px solid var(--primary-dark);
         }
-        .nav-cta:hover { background: #333; transform: translateY(-1px); }
+        .btn-nav:hover { background: #fff; color: var(--primary-dark); }
 
-        .lang-switch { display: flex; gap: 8px; font-family: var(--font-display); font-size: 0.8rem; font-weight: 600; }
-        .lang-btn { background: transparent; border: none; color: var(--text-subtitle); cursor: pointer; padding: 0; }
-        .lang-btn.active { color: var(--text-luminous); text-decoration: underline; }
-
-        main {
-            width: 100%;
-            max-width: 1000px;
-            /* AJUSTADO: Reducido padding top de main ya que el Hero tiene su propio espacio ahora */
-            padding: 40px 24px 120px;
-            display: flex;
-            flex-direction: column;
-            gap: 160px;
-            position: relative;
-            z-index: 2;
-        }
+        .lang-switch { margin-left: 20px; font-weight: 700; font-size: 0.85rem; cursor: pointer; color: var(--text-muted); }
 
         /* --- HERO SECTION --- */
-        .hero-container {
-            display: flex; justify-content: center; align-items: center;
-            text-align: center;
-            /* CRÍTICO: Padding superior para bajar la foto y evitar que el nav la tape */
-            padding-top: 180px;
-            padding-bottom: 60px;
+        .hero { 
+            padding-top: 180px; padding-bottom: 100px; text-align: center; 
+            position: relative;
+            background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 100%);
         }
-        .hero-content { max-width: 800px; }
-
-        .founder-section { display: flex; flex-direction: column; align-items: center; margin-bottom: 32px; }
-        .profile-wrapper {
-            position: relative; margin-bottom: 24px; 
-            width: 150px; height: 150px;
-            border-radius: 50%;
-            padding: 4px;
-            background: #fff;
-            box-shadow: var(--shadow-hover);
-        }
-        .profile-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; }
         
-        .founder-label {
-            font-family: var(--font-display); font-size: 0.8rem; text-transform: uppercase;
-            letter-spacing: 0.15em; color: var(--accent-gold); font-weight: 700; margin-top: 8px;
+        .hero-label { 
+            color: var(--accent-gold); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; 
+            font-size: 0.85rem; margin-bottom: 24px; display: block;
         }
 
         h1 {
-            font-family: var(--font-display);
-            font-size: clamp(3rem, 6vw, 4.5rem);
-            font-weight: 800;
-            line-height: 1.1;
-            color: var(--text-luminous);
-            margin-bottom: 24px;
-            letter-spacing: -0.04em;
+            font-family: var(--font-sans); font-weight: 800; font-size: clamp(3rem, 6vw, 5rem);
+            line-height: 1.1; color: var(--primary-dark); margin-bottom: 32px; letter-spacing: -0.03em;
         }
-
-        .highlight-text { 
-            color: var(--accent-highlight); 
-            position: relative; display: inline-block;
-        }
-
-        .hero p {
-            font-family: var(--font-body); font-size: 1.3rem; color: var(--text-dim);
-            font-weight: 300; line-height: 1.6; max-width: 700px; margin: 0 auto 40px;
-        }
+        .highlight { color: var(--primary-blue); position: relative; }
         
-        .hero-btn {
-            padding: 16px 40px; background: var(--text-luminous); color: #fff;
-            border-radius: 50px; font-family: var(--font-display); font-weight: 600; font-size: 0.95rem;
-            text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
-            transition: all 0.3s ease; box-shadow: 0 10px 20px -5px rgba(0,0,0,0.15);
+        .hero-sub {
+            font-size: 1.25rem; color: var(--text-muted); max-width: 800px; margin: 0 auto 40px;
+            font-weight: 400; line-height: 1.6;
         }
-        .hero-btn:hover { background: #333; transform: translateY(-2px); }
 
-        /* --- BENTO GRID --- */
-        .section-header { 
-            margin-bottom: 60px; text-align: left; 
-            border-top: 1px solid var(--text-luminous); padding-top: 24px;
-            display: flex; justify-content: space-between; align-items: baseline;
+        .cta-container { display: flex; gap: 16px; justify-content: center; }
+        .btn-primary {
+            background: var(--primary-blue); color: white; padding: 16px 40px; border-radius: 8px;
+            text-decoration: none; font-weight: 700; font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(3, 105, 161, 0.3); transition: transform 0.2s;
         }
-        .section-title { 
-            font-family: var(--font-display); font-size: 1rem; font-weight: 700;
-            color: var(--text-luminous); text-transform: uppercase; letter-spacing: 0.05em;
-        }
-        .section-subtitle { font-family: var(--font-body); color: var(--text-subtitle); font-style: italic; font-size: 1.1rem; }
-
-        .bento-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
-        .glass-card {
-            background: var(--surface-card); border: 1px solid var(--border-light);
-            border-radius: 12px; padding: 32px; transition: all 0.3s ease;
-            display: flex; flex-direction: column; height: 100%; box-shadow: var(--shadow-soft);
-        }
-        .glass-card:hover { border-color: var(--border-hover); transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(3, 105, 161, 0.4); }
         
-        .card-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; margin-bottom: 12px; color: var(--text-luminous); }
-        .card-desc { color: var(--text-dim); font-size: 1rem; line-height: 1.6; font-weight: 400; margin-bottom: 24px; flex-grow: 1; }
-        .feature-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-        .tag { 
-            font-family: var(--font-display); font-size: 0.7rem; font-weight: 600; padding: 6px 12px; 
-            color: var(--text-luminous); background: var(--bg-mid); border: 1px solid var(--border-hover); border-radius: 4px; 
+        .btn-outline {
+            background: white; color: var(--primary-dark); border: 2px solid var(--border-subtle);
+            padding: 16px 40px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .btn-outline:hover { border-color: var(--primary-dark); }
+
+        /* --- METRICS BELT --- */
+        .metrics-belt {
+            background: var(--primary-dark); color: white; padding: 60px 0;
+            margin-bottom: 100px; position: relative; overflow: hidden;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
+        }
+        .metrics-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px; text-align: center;
+        }
+        .metric-item { position: relative; z-index: 2; }
+        .metric-val { 
+            font-size: 3.5rem; font-weight: 800; color: white; display: block; margin-bottom: 8px;
+            font-family: var(--font-sans);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .metric-label { 
+            font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; 
+            color: rgba(255,255,255,0.7); font-weight: 600;
         }
 
-        /* --- EXPERIENCE --- */
-        .xp-wrapper { width: 100%; }
-        .xp-category-title {
-            font-family: var(--font-display); font-size: 1.5rem; color: var(--text-luminous);
-            margin: 80px 0 40px; font-weight: 700; letter-spacing: -0.03em;
+        /* --- SERVICES (4-GRID) --- */
+        .services-grid { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; 
+            margin-bottom: 120px;
+        }
+        .section-header { margin-bottom: 60px; max-width: 800px; }
+        .section-title { font-family: var(--font-serif); font-size: 2.5rem; color: var(--primary-dark); margin-bottom: 16px; font-weight: 700; }
+        .section-desc { font-size: 1.1rem; color: var(--text-muted); }
+
+        .service-card {
+            background: var(--bg-surface); padding: 40px 32px; border: 1px solid var(--border-subtle);
+            border-radius: 12px; transition: all 0.3s; position: relative; overflow: hidden;
+            box-shadow: var(--shadow-card);
+        }
+        .service-card:hover { 
+            border-color: var(--primary-blue); transform: translateY(-5px); 
+            box-shadow: var(--shadow-glow);
+        }
+        .service-card::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--primary-blue); opacity: 0; transition: opacity 0.3s;
+        }
+        .service-card:hover::after { opacity: 1; }
+
+        .svc-icon { font-size: 2rem; margin-bottom: 24px; display: block; }
+        .svc-title { font-size: 1.4rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 12px; }
+        .svc-text { color: var(--text-muted); margin-bottom: 20px; line-height: 1.6; font-size: 0.95rem; }
+        .svc-list { list-style: none; border-top: 1px solid var(--border-subtle); padding-top: 20px; }
+        .svc-list li { 
+            padding-left: 20px; position: relative; margin-bottom: 8px; font-size: 0.85rem; color: var(--text-main); font-weight: 600;
+        }
+        .svc-list li::before {
+            content: '•'; color: var(--primary-blue); position: absolute; left: 0; font-weight: 800; font-size: 1.2em; line-height: 1;
         }
 
-        .xp-card {
-            position: relative; padding: 40px; margin-bottom: 40px;
-            background: #fff; border-bottom: 1px solid var(--border-light); 
+        /* --- AUTHORITY SECTION (TIMELINE + LOGOS) --- */
+        .authority-grid {
+            display: grid; grid-template-columns: 2fr 1fr; gap: 60px;
+            align-items: start; margin-bottom: 120px;
+        }
+
+        .timeline-container { position: relative; padding-left: 30px; }
+        .timeline-container::before {
+            content: ''; position: absolute; left: 0; top: 10px; bottom: 0; width: 3px;
+            background: linear-gradient(to bottom, var(--primary-dark) 0%, var(--border-strong) 80%, transparent 100%);
+            border-radius: 3px;
+        }
+
+        .timeline-card {
+            background: white; border: 1px solid var(--border-subtle); border-radius: 12px;
+            padding: 32px; margin-bottom: 40px; position: relative;
+            box-shadow: var(--shadow-card); transition: transform 0.3s;
+        }
+        .timeline-card:hover { transform: translateX(5px); border-color: var(--primary-blue); }
+        
+        .timeline-marker {
+            position: absolute; left: -44px; top: 32px;
+            width: 24px; height: 24px; background: white;
+            border: 6px solid var(--primary-dark); border-radius: 50%;
+            z-index: 2; box-shadow: 0 0 0 4px var(--bg-body);
+        }
+        .timeline-card:first-child .timeline-marker { border-color: var(--primary-blue); }
+
+        .xp-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; flex-wrap: wrap; }
+        .xp-title { font-size: 1.4rem; font-weight: 800; color: var(--primary-dark); }
+        .xp-date { font-size: 0.85rem; font-weight: 700; color: var(--accent-gold); text-transform: uppercase; }
+        .xp-company { font-family: var(--font-serif); font-size: 1.1rem; color: var(--text-muted); font-style: italic; margin-bottom: 16px; display: block; }
+        .xp-desc { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
+
+        /* Estilo PRO para los proyectos ELIT */
+        .elit-projects { 
+            margin-top: 32px; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 20px; 
+        }
+        .elit-project-item { 
+            background: #fff;
+            border: 1px solid var(--border-subtle); 
+            border-radius: 12px; 
+            padding: 24px; 
+            border-left: 4px solid var(--primary-blue);
             transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
-        .xp-card:hover { background: var(--bg-mid); border-radius: 12px; }
-        .xp-card.featured { 
-            background: #fff; border: 1px solid var(--border-light); border-radius: 12px; box-shadow: var(--shadow-hover);
-        }
-        
-        .xp-header { margin-bottom: 20px; display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px;}
-        .xp-role { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--text-luminous); display: block; margin-bottom: 4px; }
-        .xp-company { color: var(--text-dim); font-weight: 500; font-size: 1rem; font-family: var(--font-body); font-style: italic; }
-        .xp-date { 
-            font-family: var(--font-display); font-size: 0.8rem; color: var(--text-luminous); font-weight: 600;
-        }
-        .xp-desc { color: var(--text-dim); line-height: 1.8; font-size: 1.1rem; margin-bottom: 24px; max-width: 800px; }
-
-        /* Engagements */
-        .engagement-list { display: grid; gap: 40px; margin-top: 40px; }
-        .engagement-item { border-top: 1px solid var(--border-light); padding-top: 24px; }
-        
-        .eng-title { color: var(--text-luminous); font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; margin-bottom: 8px; }
-        .eng-tag { 
-            font-size: 0.7rem; color: #fff; background: var(--text-luminous);
-            padding: 4px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em; margin-left: 10px; font-weight: 600; vertical-align: middle;
-        }
-        .eng-desc { font-size: 1rem; color: var(--text-dim); margin-bottom: 16px; font-family: var(--font-body); font-style: italic; }
-        
-        .eng-bullets { list-style: none; padding-left: 0; }
-        .eng-bullets li { 
-            position: relative; padding-left: 20px; font-size: 1rem; color: var(--text-dim); 
-            margin-bottom: 10px; line-height: 1.6; 
-        }
-        .eng-bullets li::before { 
-            content: '→'; position: absolute; left: 0; font-weight: bold; color: var(--text-luminous); font-family: sans-serif;
+        .elit-project-item:hover { 
+            background: white; 
+            box-shadow: 0 8px 16px rgba(0,0,0,0.08); 
+            transform: translateY(-2px); 
+            border-color: var(--primary-blue);
         }
         
-        .xp-link {
-            display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--accent-highlight);
-            text-decoration: none; padding-bottom: 2px; margin-top: 16px; transition: all 0.3s; 
-            font-weight: 600; border-bottom: 1px solid rgba(37, 99, 235, 0.2);
+        .elit-proj-name { 
+            font-family: var(--font-serif);
+            font-size: 1.1rem; font-weight: 700; color: var(--primary-dark); 
+            display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
         }
-        .xp-link:hover { border-bottom-color: var(--accent-highlight); }
+        .elit-proj-desc { font-size: 0.9rem; color: var(--text-main); line-height: 1.6; padding-left: 2px; }
 
-        /* Verified Image */
-        .verified-image-container { margin-top: 32px; display: block; width: 100%; }
-        .verified-badge { 
-            display: inline-block; margin-bottom: 12px; color: var(--accent-gold); 
-            font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; 
+        /* Estilo para métricas de otros trabajos */
+        .xp-impact-box { 
+            background: #f1f5f9; padding: 16px; border-radius: 8px; border-left: 4px solid var(--primary-blue);
+            margin-top: 16px;
         }
-        .verified-img { 
-            width: 100%; max-width: 100%; height: auto; display: block; border-radius: 8px; 
-            box-shadow: var(--shadow-hover); border: 1px solid var(--border-light);
-            transition: transform 0.3s ease;
-        }
-        .verified-img:hover { transform: scale(1.01); }
+        .xp-stat { font-weight: 700; color: var(--primary-dark); font-size: 0.95rem; display: block; margin-bottom: 4px; }
 
-        /* --- CERTIFICATIONS --- */
-        .cred-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
-        .cred-card {
-            background: #fff; border: 1px solid var(--border-light);
-            padding: 24px; transition: 0.3s; height: 100%; display: flex; flex-direction: column;
-            border-radius: 12px; box-shadow: var(--shadow-soft);
+        /* PROFILE & CERTS SIDEBAR */
+        .profile-sticky { position: sticky; top: 100px; }
+        .profile-card {
+            background: white; border: 1px solid var(--border-subtle); border-radius: 16px;
+            padding: 32px; text-align: center; box-shadow: var(--shadow-card);
+            margin-bottom: 32px;
         }
-        .cred-card:hover { border-color: var(--text-luminous); }
+        .profile-img {
+            width: 140px; height: 140px; border-radius: 50%; object-fit: cover;
+            margin: 0 auto 20px; border: 4px solid var(--bg-body);
+        }
         
-        .cred-top { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
-        .cred-logo { width: 32px; height: 32px; object-fit: contain; filter: grayscale(100%); opacity: 0.6; transition: 0.3s; }
-        .cred-card:hover .cred-logo { filter: grayscale(0%); opacity: 1; }
+        .certs-container {
+            background: white; border: 1px solid var(--border-subtle); border-radius: 16px;
+            padding: 24px;
+        }
+        .certs-title { font-size: 0.9rem; font-weight: 800; color: var(--primary-dark); text-transform: uppercase; margin-bottom: 20px; text-align: center; letter-spacing: 0.05em; }
         
-        .cred-title { font-size: 1rem; color: var(--text-luminous); font-weight: 700; font-family: var(--font-display); line-height: 1.3; }
-        .cred-org { font-size: 0.85rem; color: var(--text-subtitle); margin-top: 4px; }
-        .cred-skills { margin-top: auto; display: flex; flex-wrap: wrap; gap: 8px; pt: 16px; border-top: 1px solid var(--border-light); }
-        .skill-pill { font-size: 0.7rem; color: var(--text-dim); background: var(--bg-mid); padding: 4px 10px; border-radius: 4px; font-weight: 600; border: 1px solid var(--border-light); }
+        .logo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .cert-logo-box {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 16px; 
+            background: white; 
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px; gap: 8px;
+            transition: 0.2s;
+            height: 100px;
+        }
+        .cert-logo-box:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-color: var(--primary-blue); }
+        
+        .cert-img { 
+            height: 100%; width: 100%; 
+            max-height: 40px; 
+            object-fit: contain; 
+            transition: 0.3s; 
+        }
+        
+        .cert-name { font-size: 0.65rem; font-weight: 600; color: var(--text-muted); text-align: center; line-height: 1.2; margin-top: 4px;}
 
-        /* --- CTA --- */
-        .power-cta { margin-top: 120px; padding-top: 60px; border-top: 1px solid var(--border-light); text-align: left; }
-        .cta-title { font-size: 2.5rem; font-family: var(--font-display); font-weight: 700; color: var(--text-luminous); margin-bottom: 24px; }
-        .cta-desc { color: var(--text-dim); font-size: 1.2rem; max-width: 600px; margin-bottom: 40px; font-weight: 300; line-height: 1.6; }
+        /* --- PREMIUM WHATSAPP WIDGET --- */
+        .wa-premium-widget {
+            position: fixed; bottom: 32px; right: 32px; z-index: 1000;
+            display: flex; flex-direction: column; align-items: flex-end; gap: 12px;
+        }
 
-        footer { padding: 40px 0; border-top: 1px solid var(--border-light); margin-top: 60px; color: var(--text-subtitle); font-size: 0.8rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
-        .footer-links { display: flex; gap: 24px; }
-        .footer-link { color: var(--text-dim); text-decoration: none; transition: 0.3s; font-weight: 600; }
-        .footer-link:hover { color: var(--text-luminous); }
+        .wa-pill-btn {
+            display: flex; align-items: center; gap: 12px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 12px 24px 12px 12px;
+            border-radius: 50px;
+            box-shadow: var(--shadow-premium);
+            border: 1px solid rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+        
+        .wa-pill-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 25px 30px -5px rgba(0, 0, 0, 0.15);
+        }
 
-        @media (max-width: 768px) {
-            h1 { font-size: 2.8rem; }
-            .section-header { flex-direction: column; gap: 8px; }
-            nav { padding: 12px 20px; }
-            .desktop-links { display: none; }
-            .nav-left { flex-grow: 1; }
-            .nav-cta { padding: 8px 16px; font-size: 0.75rem; }
-            main { padding-top: 100px; }
+        .wa-icon-circle {
+            width: 44px; height: 44px;
+            background: var(--whatsapp-green);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: white;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+            position: relative;
+        }
+        
+        .wa-icon-svg { width: 24px; height: 24px; fill: white; }
+
+        .wa-status-dot {
+            position: absolute; bottom: 2px; right: 2px;
+            width: 10px; height: 10px;
+            background: #10b981; /* Online green */
+            border: 2px solid white;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .wa-text-group { display: flex; flex-direction: column; }
+        .wa-label-top { font-size: 0.7rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+        .wa-label-main { font-size: 0.95rem; color: var(--primary-dark); font-weight: 700; font-family: var(--font-sans); }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        /* --- FOOTER --- */
+        footer { background: var(--primary-dark); color: white; padding: 60px 0; text-align: center; font-size: 0.9rem; margin-top: 80px; }
+        .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 24px; }
+        .footer-links a { color: #94a3b8; text-decoration: none; }
+        .footer-links a:hover { color: white; }
+
+        @media (max-width: 900px) {
+            .authority-grid { grid-template-columns: 1fr; }
+            .profile-sticky { position: static; order: -1; margin-bottom: 60px; }
+            h1 { font-size: 2.5rem; }
+            .wa-label-top, .wa-label-main { display: none; } /* Show only icon on mobile */
+            .wa-pill-btn { padding: 8px; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="nav-left">
-            <div class="logo-wrapper">
-                <!-- LOGO CONFIGURADO: Background Eraser (1).jpeg (Extensión corregida) -->
-                <img src="Background%20Eraser%20(1).jpeg" alt="ELIT Logo" class="nav-logo-img" onerror="this.style.display='none'; document.querySelector('.logo-fallback').style.display='block'">
-                <div class="logo-fallback" style="display:none; font-weight:800; font-family:var(--font-display); font-size:1.8rem; text-align:center; line-height:48px; color:var(--accent-blue);">E</div>
+        <div class="container nav-content">
+            <div class="logo">
+                <div class="logo-box">E</div>
+                ELIT Data Systems
             </div>
-            <span class="nav-brand" style="margin-left: 12px;">ELIT <span style="font-weight:400; color:var(--text-subtitle);">Data Systems</span></span>
-        </div>
-        
-        <div class="desktop-links">
-            <a href="#soluciones" class="nav-link" data-key="nav_solutions">Expertise</a>
-            <a href="#experience" class="nav-link" data-key="nav_xp">Track Record</a>
-            <a href="#credentials" class="nav-link" data-key="nav_certs">Authority</a>
-        </div>
-        
-        <div class="nav-right">
-            <a href="https://wa.me/3025141055" class="nav-cta" data-key="cta_btn">Contactar</a>
-            <div class="lang-switch">
-                <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
-                <span style="color:var(--border-light)">/</span>
-                <button class="lang-btn" onclick="setLanguage('es')">ES</button>
+            <div class="nav-links">
+                <a href="#expertise" class="nav-item" data-key="nav_exp">Expertise</a>
+                <a href="#services" class="nav-item" data-key="nav_svc">Solutions</a>
+                <a href="#impact" class="nav-item" data-key="nav_impact">Impact</a>
+                <a href="https://wa.me/573025141055" class="btn-nav" data-key="nav_contact">Strategy Call</a>
+                <div class="lang-switch">
+                    <span onclick="setLang('en')" style="color:var(--primary-dark)">EN</span> / 
+                    <span onclick="setLang('es')">ES</span>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
-    <div class="hero-container">
-        <div class="hero-content">
-            
-            <div class="founder-section">
-                <div class="profile-wrapper">
-                    <!-- FOTO DE PERFIL: FF... .png (Asegurado) -->
-                    <img src="FF230941-48C7-4D41-94CB-BBCBFEA69D67.png" alt="Efrain Gomez" class="profile-img" onerror="this.style.display='none'; document.querySelector('.founder-fallback').style.display='block'">
-                    <div class="founder-fallback" style="display:none; width:100%; height:100%; border-radius:50%; background:#eee; text-align:center; line-height:150px; font-weight:bold; color:#ccc;">EG</div>
-                </div>
-                <span class="founder-label">Efrain Gomez</span>
+    <header class="hero">
+        <div class="container">
+            <span class="hero-label">Data Engineering & Revenue Operations</span>
+            <h1 data-key="hero_title">Engineering Clarity in <br><span class="highlight">Complex Systems</span>.</h1>
+            <p class="hero-sub" data-key="hero_sub">
+                We build the financial and operational architecture that scales high-growth companies from chaotic inputs to executive strategy.
+            </p>
+            <div class="cta-container">
+                <a href="#expertise" class="btn-primary" data-key="btn_primary">View Track Record</a>
+                <a href="#services" class="btn-outline" data-key="btn_secondary">Solutions</a>
             </div>
+        </div>
+    </header>
 
-            <h1 data-key="hero_title">Engineering Clarity in <br><span class="highlight-text">Complex Systems</span>.</h1>
-            <div class="hero">
-                <p data-key="hero_sub">
-                    I translate chaotic data into executive strategy. No fluff, just scalable architecture and automated precision for high-growth companies.
-                </p>
-                <a href="#experience" class="hero-btn" data-key="hero_cta">
-                    View Track Record
-                </a>
+    <!-- METRICS BELT -->
+    <div class="metrics-belt" id="impact">
+        <div class="container">
+            <div class="metrics-grid">
+                <div class="metric-item">
+                    <span class="metric-val">800%</span>
+                    <span class="metric-label" data-key="met_1">Portfolio Growth (Openpay)</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-val">$1.9B</span>
+                    <span class="metric-label" data-key="met_2">Monthly Billing Managed</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-val">Top 1</span>
+                    <span class="metric-label" data-key="met_3">Global Sales Rank</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-val">20yr</span>
+                    <span class="metric-label" data-key="met_4">Historical Data Recovered</span>
+                </div>
             </div>
         </div>
     </div>
 
-    <main>
+    <section class="container" id="services">
+        <div class="section-header">
+            <h2 class="section-title" data-key="svc_title">Operational Architecture</h2>
+            <p class="section-desc" data-key="svc_desc">Bridging the gap between raw Python code and C-Level revenue strategy.</p>
+        </div>
 
-        <!-- SERVICES -->
-        <section id="soluciones">
+        <div class="services-grid">
+            <!-- 1. Data Engineering -->
+            <div class="service-card">
+                <span class="svc-icon">🏗️</span>
+                <h3 class="svc-title" data-key="c1_title">Data Engineering Pipelines</h3>
+                <p class="svc-text" data-key="c1_desc">Robust ETL processes that clean, structure, and transport data from chaos to warehouse.</p>
+                <ul class="svc-list">
+                    <li>Python & SQL Optimization</li>
+                    <li>BigQuery & Cloud Storage</li>
+                    <li>Automated Cleaning Scripts</li>
+                </ul>
+            </div>
+
+            <!-- 2. Strategic Analytics -->
+            <div class="service-card" style="border-color: var(--primary-blue); background: #f0f9ff;">
+                <span class="svc-icon">📊</span>
+                <h3 class="svc-title" data-key="c4_title">Strategic Analytics</h3>
+                <p class="svc-text" data-key="c4_desc">Driving decisions. Predictive modeling and dashboards that answer the "so what?" behind the data.</p>
+                <ul class="svc-list">
+                    <li data-key="c4_li1">Advanced Descriptive Stats</li>
+                    <li data-key="c4_li2">Predictive Modeling</li>
+                    <li data-key="c4_li3">Prescriptive Growth Strategy</li>
+                </ul>
+            </div>
+
+            <!-- 3. RevOps -->
+            <div class="service-card">
+                <span class="svc-icon">🧠</span>
+                <h3 class="svc-title" data-key="c2_title">Revenue Operations (RevOps)</h3>
+                <p class="svc-text" data-key="c2_desc">Aligning your tech stack with your bank account. Optimizing CRM flows to stop revenue leakage.</p>
+                <ul class="svc-list">
+                    <li>HubSpot / Salesforce Architecture</li>
+                    <li>Lead Scoring Algorithms</li>
+                    <li>Forecast Modeling</li>
+                </ul>
+            </div>
+
+            <!-- 4. AI & Automation -->
+            <div class="service-card">
+                <span class="svc-icon">⚡</span>
+                <h3 class="svc-title" data-key="c3_title">AI & Process Automation</h3>
+                <p class="svc-text" data-key="c3_desc">Replacing manual drudgery with autonomous agents. NLP analysis for massive datasets.</p>
+                <ul class="svc-list">
+                    <li>Natural Language Processing (NLP)</li>
+                    <li>Intelligent API Integrations</li>
+                    <li>Automated Reporting</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- AUTHORITY & TIMELINE SECTION -->
+    <section class="container authority-grid" id="expertise">
+        
+        <!-- TIMELINE (LEFT) -->
+        <div>
             <div class="section-header">
-                <span class="section-title" data-key="services_title">Core Competencies</span>
-                <span class="section-subtitle" data-key="services_sub">Operational Value</span>
+                <span class="badge badge-gold">Execution History</span>
+                <h2 class="section-title" style="margin-top:16px;" data-key="exp_title">Professional Timeline</h2>
+                <p class="section-desc" data-key="exp_desc">A track record of solving "impossible" data clutter and scaling revenue engines.</p>
             </div>
 
-            <div class="bento-grid">
-                <div class="glass-card">
-                    <h3 class="card-title" data-key="card1_title">Data Engineering</h3>
-                    <p class="card-desc" data-key="card1_desc">Designing the backbone. Robust ETL pipelines and scalable Data Lakes that ensure data integrity at the source.</p>
-                    <div class="feature-tags">
-                        <span class="tag">Google Cloud</span>
-                        <span class="tag">BigQuery</span>
-                        <span class="tag">Architecture</span>
+            <div class="timeline-container">
+                
+                <!-- ELIT CARD (EXPANDED PRO PROJECTS) -->
+                <div class="timeline-card">
+                    <div class="timeline-marker"></div>
+                    <div class="xp-header">
+                        <h3 class="xp-title">Founder & Lead Engineer</h3>
+                        <span class="xp-date">2025 - Present</span>
+                    </div>
+                    <span class="xp-company">ELIT Data Systems</span>
+                    <p class="xp-desc" data-key="elit_intro">Leading a Data Engineering and AI consultancy, bridging the gap between technical implementation (Python, ETL) and business strategy. Clients trust my ability to transform complex data into operational and financial growth.</p>
+                    
+                    <div class="elit-projects">
+                        <div class="elit-project-item">
+                            <span class="elit-proj-name" data-key="proj_1_title">🔍 KIGGU | Data Archaeology</span>
+                            <div class="elit-proj-desc" data-key="proj_1_desc">Recovered a critical asset of 20 years of "lost" and disorganized data. Designed Python + AI pipelines for massive cleaning and structuring of +1,200 raw files. Presented predictive models (Scikit-learn) to the C-Suite, grounding strategic decisions on recovered historical evidence.</div>
+                        </div>
+
+                        <div class="elit-project-item">
+                            <span class="elit-proj-name" data-key="proj_2_title">🌎 RED RACCOON ART HOUSE (USA)</span>
+                            <div class="elit-proj-desc" data-key="proj_2_desc">Designed the integral Sales, Operations, and Strategy architecture for brand expansion in Orlando, FL. Executed data-driven competitive analysis and built executive dashboards for real-time profitability monitoring.</div>
+                        </div>
+
+                        <div class="elit-project-item">
+                            <span class="elit-proj-name" data-key="proj_3_title">🎓 UNIVERSIDAD DE LA SALLE</span>
+                            <div class="elit-proj-desc" data-key="proj_3_desc">Selected to lead 3 consecutive initiatives: NLP Analytics to process +11,000 records and diagnose attrition, Automation of the "A Rodar Unisalle" ecosystem, and Design of the automated degree management system.</div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="glass-card">
-                    <h3 class="card-title" data-key="card2_title">Process Automation</h3>
-                    <p class="card-desc" data-key="card2_desc">Eliminating friction. Deploying autonomous agents and NLP models to handle repetitive, high-volume tasks.</p>
-                    <div class="feature-tags">
-                        <span class="tag">AI Agents</span>
-                        <span class="tag">Gen AI</span>
-                        <span class="tag">Workflows</span>
+                <!-- TENDENCYS -->
+                <div class="timeline-card">
+                    <div class="timeline-marker"></div>
+                    <div class="xp-header">
+                        <h3 class="xp-title">Business Developer</h3>
+                        <span class="xp-date">2023 - 2024</span>
+                    </div>
+                    <span class="xp-company">Tendencys Innovations</span>
+                    <p class="xp-desc" data-key="tend_txt">Merged sales execution with Business Intelligence, designing a Data-Driven strategy to maximize resource allocation and optimize the sales cycle.</p>
+                    <div class="xp-impact-box">
+                        <span class="xp-stat">#1 Global Rank</span>
+                        <span class="xp-desc" data-key="tend_imp">Top 5 globally among 94 executives. Achieved all-time sales record through algorithmic lead prioritization.</span>
                     </div>
                 </div>
 
-                <div class="glass-card">
-                    <h3 class="card-title" data-key="card3_title">Strategic Analytics</h3>
-                    <p class="card-desc" data-key="card3_desc">Driving decisions. Predictive modeling and dashboards that answer the "so what?" behind the data.</p>
-                    <div class="feature-tags">
-                        <span class="tag">Predictive</span>
-                        <span class="tag">Growth Modeling</span>
+                <!-- OPENPAY -->
+                <div class="timeline-card">
+                    <div class="timeline-marker"></div>
+                    <div class="xp-header">
+                        <h3 class="xp-title">Business Executive</h3>
+                        <span class="xp-date">2023</span>
+                    </div>
+                    <span class="xp-company">Openpay (BBVA Fintech)</span>
+                    <p class="xp-desc" data-key="open_txt">Acted as the strategic bridge between payments technology and business within BBVA's Fintech division.</p>
+                    <div class="xp-impact-box">
+                        <span class="xp-stat">800% Growth</span>
+                        <span class="xp-desc" data-key="open_imp">Scaled portfolio from $200M to $1.9B COP in 8 months through technical API onboarding.</span>
                     </div>
                 </div>
+                
+                 <!-- RED & BLUE -->
+                 <div class="timeline-card">
+                    <div class="timeline-marker"></div>
+                    <div class="xp-header">
+                        <h3 class="xp-title">Team Leader</h3>
+                        <span class="xp-date">2022</span>
+                    </div>
+                    <span class="xp-company">Red & Blue Agency</span>
+                    <div class="xp-impact-box">
+                        <span class="xp-stat">Ops Architect</span>
+                        <span class="xp-desc" data-key="red_imp">Designed a scalable demand generation engine producing +70 SQLs monthly.</span>
+                    </div>
+                </div>
+
             </div>
-        </section>
+        </div>
 
-        <!-- PORTFOLIO SECTION -->
-        <section id="experience">
-            
-            <div class="xp-category-title" data-key="cat_consulting">Independent Practice & Strategic Projects</div>
-
-            <div class="xp-card featured">
-                <div class="xp-header">
-                    <div>
-                        <span class="xp-role" data-key="job_elit_role">Founder & Principal Consultant</span>
-                        <span class="xp-company">ELIT Data Systems</span>
-                    </div>
-                    <span class="xp-date" data-key="job_elit_date">Feb 2025 - Present</span>
-                </div>
-                <p class="xp-desc" data-key="job_elit_desc">
-                    Partnering with organizations to architect data systems that scale. Focusing on high-impact, short-term implementation with long-term value.
+        <!-- SIDEBAR: PROFILE & LOGOS (RIGHT) -->
+        <div class="profile-sticky">
+            <div class="profile-card">
+                <!-- Profile Image -->
+                <img src="FF230941-48C7-4D41-94CB-BBCBFEA69D67.png" alt="Efrain Gomez" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?name=Efrain+Gomez&background=0f172a&color=fff&size=500'">
+                
+                <h3 style="font-size:1.5rem; margin-bottom:8px;">Efrain Gomez</h3>
+                <span style="color:var(--primary-blue); font-weight:700; text-transform:uppercase; font-size:0.8rem; letter-spacing:1px;">Data Engineer & RevOps</span>
+                
+                <p style="margin:24px 0; color:var(--text-muted); font-size:0.9rem; line-height:1.6;" data-key="bio">
+                    I understand the code AND the money. I build systems that don't just "work" technically, but drive measurable financial growth.
                 </p>
 
-                <div class="engagement-list">
-                    
-                    <!-- Red Raccoon -->
-                    <div class="engagement-item">
-                        <div class="eng-title">Red Raccoon Art House <span class="eng-tag" data-key="loc_global">Global Expansion</span></div>
-                        <p class="eng-desc" data-key="eng_rr_type">Strategic Restructuring</p>
-                        <ul class="eng-bullets">
-                            <li data-key="eng_rr_li1">Structured operational data for market entry (US, Saudi Arabia, Colombia).</li>
-                            <li data-key="eng_rr_li2">Built the 'Customer Journey Engine' to track cross-border value.</li>
-                        </ul>
-                        <a href="https://onedrive.live.com/?id=%2Fpersonal%2Fb0b57bca94bcbc44%2FDocuments%2FDesktop%2FCert%20Professional%2FRED%5FRACCOON%5FCERT%5FEFRAIN%5FGOMEZ%2Epdf&parent=%2Fpersonal%2Fb0b57bca94bcbc44%2FDocuments%2FDesktop%2FCert%20Professional" target="_blank" class="xp-link" data-key="btn_view_cert">
-                            Reference Document
-                        </a>
-                    </div>
+                <a href="CV_Efrain_Gomez_Revenue_Operations_Data_Engineer.pdf" download class="btn-primary" style="width:100%; display:block; padding:12px; font-size:0.9rem;" data-key="btn_cv">Download Full CV</a>
+            </div>
 
-                    <!-- Unisalle -->
-                    <div class="engagement-item">
-                        <div class="eng-title">Universidad de La Salle <span class="eng-tag" data-key="loc_3proj">3 Projects / 1 Year</span></div>
-                        <p class="eng-desc" data-key="eng_uni_type">Automation Ecosystem & NLP</p>
-                        <ul class="eng-bullets">
-                            <li data-key="eng_uni_li1">Entrusted with 3 consecutive automation projects to reduce administrative load.</li>
-                            <li data-key="eng_uni_li2">Analyzed +11k records via NLP to diagnose student retention issues.</li>
-                        </ul>
-                        
-                        <!-- TESTIMONIO VIVIANA -->
-                        <div class="verified-image-container">
-                            <span class="verified-badge">Client Endorsement</span>
-                            <img src="Viviana%20Ingeniera%20ambiental.PNG" alt="Testimonial Unisalle" class="verified-img" onerror="this.style.display='none'">
-                        </div>
+            <!-- CERTIFIED AUTHORITY SECTION (EXACT FILENAMES) -->
+            <div class="certs-container">
+                <div class="certs-title" data-key="auth_header">Certified Authority</div>
+                <div class="logo-grid">
+                    <!-- IBM -->
+                    <div class="cert-logo-box">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM" class="cert-img">
+                        <span class="cert-name">Data Science</span>
                     </div>
-
-                    <!-- Kiggu -->
-                    <div class="engagement-item">
-                        <div class="eng-title">Kiggu <span class="eng-tag" data-key="kiggu_tag">Strategic Project</span></div>
-                        <p class="eng-desc" data-key="eng_kig_type">Sales Operations & Modeling</p>
-                        <ul class="eng-bullets">
-                            <li data-key="eng_kig_li1">Developed revenue projection models to support executive decision making.</li>
-                            <li data-key="eng_kig_li3">Consolidated +1,200 chaotic data files into a unified reporting structure.</li>
-                        </ul>
-                        <a href="https://onedrive.live.com/?viewid=c465df13%2D98e3%2D4b5c%2D8a3e%2D3e431c7a6bde&id=%2Fpersonal%2Fb0b57bca94bcbc44%2FDocuments%2FDesktop%2FCert%20Professional%2FCertificado%20Prestacion%20de%20Servicios%20Efrain%20Gomez%2Epdf&parent=%2Fpersonal%2Fb0b57bca94bcbc44%2FDocuments%2FDesktop%2FCert%20Professional" target="_blank" class="xp-link" data-key="btn_view_contract">
-                            Contract Verification
-                        </a>
+                    <!-- Google -->
+                    <div class="cert-logo-box">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg" alt="Google Cloud" class="cert-img">
+                        <span class="cert-name">Data Mgmt</span>
                     </div>
-
+                    <!-- Meta -->
+                    <div class="cert-logo-box">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg" alt="Meta" class="cert-img">
+                        <span class="cert-name">Analytics</span>
+                    </div>
+                    <!-- UC Davis (EXACT FILENAME) -->
+                    <div class="cert-logo-box">
+                        <img src="uc_davis_logo.jfif" alt="UC Davis" class="cert-img">
+                        <span class="cert-name">SQL Specialist</span>
+                    </div>
+                    <!-- La Salle (EXACT FILENAME) -->
+                    <div class="cert-logo-box" style="grid-column: span 2;">
+                        <img src="image_180ad4.png" alt="Universidad de La Salle" class="cert-img">
+                        <span class="cert-name">Data Science Degree</span>
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <div class="xp-category-title" data-key="cat_corporate">Corporate Background</div>
+    </section>
 
-            <div class="xp-card">
-                <div class="xp-header">
-                    <div>
-                        <span class="xp-role" data-key="job_tendencys_role">Business Developer</span>
-                        <span class="xp-company">Tendencys Innovations</span>
-                    </div>
-                    <span class="xp-date">Sep 2023 - Oct 2024</span>
-                </div>
-                <p class="xp-desc" data-key="job_tendencys_desc">Designed a data-driven strategy that achieved #1 Revenue Rank across 7 countries.</p>
-                <a href="https://1drv.ms/b/c/b0b57bca94bcbc44/IQAX1317kOVhSah1-O3PHpNfAbVUUpnj-n5QxRSqxqSGpi4?e=vUv3hv" target="_blank" class="xp-link" data-key="verify_cert">Verify</a>
+    <!-- PREMIUM WHATSAPP WIDGET (TEXT PRESERVED) -->
+    <div class="wa-premium-widget">
+        <a href="https://wa.me/573025141055" target="_blank" class="wa-pill-btn">
+            <div class="wa-text-group">
+                <span class="wa-label-top" data-key="wa_top">Available Now</span>
+                <span class="wa-label-main" data-key="wa_main">Consult Availability</span>
             </div>
-
-            <div class="xp-card">
-                <div class="xp-header">
-                    <div>
-                        <span class="xp-role" data-key="job_openpay_role">Business Executive</span>
-                        <span class="xp-company">Openpay Colombia</span>
-                    </div>
-                    <span class="xp-date">Jan 2023 - Aug 2023</span>
-                </div>
-                <p class="xp-desc" data-key="job_openpay_desc">Managed a high-growth portfolio ($200M to $1.98B COP). Led API integration efforts.</p>
-                <a href="https://1drv.ms/b/c/b0b57bca94bcbc44/IQDVb3fbgv6cTrIL95eVk0TEAYT-sqxzVxQbjxu82l_cFu8?e=L3OHvC" target="_blank" class="xp-link" data-key="verify_cert">Verify</a>
+            <div class="wa-icon-circle">
+                <svg class="wa-icon-svg" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z"/>
+                </svg>
+                <div class="wa-status-dot"></div>
             </div>
-            
-            <div class="xp-card">
-                <div class="xp-header">
-                    <div>
-                        <span class="xp-role" data-key="job_redblue_role">Offline Team Leader</span>
-                        <span class="xp-company">Red & Blue Agency</span>
-                    </div>
-                    <span class="xp-date">Jun 2022 - Nov 2022</span>
-                </div>
-                <p class="xp-desc" data-key="job_redblue_desc">Optimized commercial strategy for an 8-person team via conversion KPIs.</p>
-                <a href="https://onedrive.live.com/?viewid=c465df13%2D98e3%2D4b5c%2D8a3e%2D3e431c7a6bde&id=%2Fpersonal%2Fb0b57bca94bcbc44%2FDocuments%2FDesktop%2FCert%20Professional%2FCertificaci%C3%B3n%20Laboral%5FEfra%C3%ADn%20G%C3%B3mez%2E%2Epdf&parent=%2Fpersonal%2Fb0b57bca94bcbc44%2FDocuments%2FDesktop%2FCert%20Professional" target="_blank" class="xp-link" data-key="verify_cert">Verify</a>
-            </div>
-
-            <div class="xp-card">
-                <div class="xp-header">
-                    <div>
-                        <span class="xp-role" data-key="job_crehana_role">Sales Dev Rep</span>
-                        <span class="xp-company">Crehana</span>
-                    </div>
-                    <span class="xp-date">Dec 2021 - Jun 2022</span>
-                </div>
-                <p class="xp-desc" data-key="job_crehana_desc">Restructured market segmentation for EdTech LatAm using data qualification.</p>
-                <a href="https://1drv.ms/b/c/b0b57bca94bcbc44/IQAL5e6rCkL6T5mfu7zXik8uAW7LYzl6tNgqE_wa-s2CADA?e=P1gZTT" target="_blank" class="xp-link" data-key="verify_cert">Verify</a>
-            </div>
-
-        </section>
-
-        <!-- CERTIFICATIONS -->
-        <section id="credentials">
-            <div class="section-header">
-                <span class="section-title" data-key="auth_title">Certified Authority</span>
-                <span class="section-subtitle">Verified Skills</span>
-            </div>
-
-            <div class="cred-grid">
-                
-                <!-- IBM CAPSTONE -->
-                <a href="https://www.coursera.org/account/accomplishments/verify/LA5SCJR90XQH" target="_blank" class="cred-link-wrapper">
-                    <div class="cred-card">
-                        <div class="cred-top">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM" class="cred-logo">
-                            <div>
-                                <span class="cred-title">Applied Data Science Capstone</span>
-                                <div class="cred-org">IBM</div>
-                            </div>
-                        </div>
-                        <div class="cred-skills">
-                            <span class="skill-pill">Data Science</span>
-                            <span class="skill-pill">Machine Learning</span>
-                            <span class="skill-pill">Python</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- GOOGLE CLOUD -->
-                <a href="https://www.credly.com/badges/6aebf5ee-f4c5-4e5a-8b51-3e164f2804e1/linked_in_profile" target="_blank" class="cred-link-wrapper">
-                    <div class="cred-card">
-                        <div class="cred-top">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg" alt="Google" class="cred-logo">
-                            <div>
-                                <span class="cred-title">Store, Process & Manage Data</span>
-                                <div class="cred-org">Google Cloud</div>
-                            </div>
-                        </div>
-                        <div class="cred-skills">
-                            <span class="skill-pill">Cloud Functions</span>
-                            <span class="skill-pill">BigQuery</span>
-                            <span class="skill-pill">Cloud Storage</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- META ANALYTICS -->
-                <a href="https://www.coursera.org/account/accomplishments/verify/CC9NKQU5BI6A" target="_blank" class="cred-link-wrapper">
-                    <div class="cred-card">
-                        <div class="cred-top">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg" alt="Meta" class="cred-logo">
-                            <div>
-                                <span class="cred-title">Introduction to Data Analytics</span>
-                                <div class="cred-org">Meta</div>
-                            </div>
-                        </div>
-                        <div class="cred-skills">
-                            <span class="skill-pill">Data Analysis</span>
-                            <span class="skill-pill">Data Cleansing</span>
-                            <span class="skill-pill">SQL</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- META PYTHON -->
-                <a href="https://www.coursera.org/account/accomplishments/verify/UDKK47H13W67" target="_blank" class="cred-link-wrapper">
-                    <div class="cred-card">
-                        <div class="cred-top">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg" alt="Meta" class="cred-logo">
-                            <div>
-                                <span class="cred-title">Python Data Analytics</span>
-                                <div class="cred-org">Meta</div>
-                            </div>
-                        </div>
-                        <div class="cred-skills">
-                            <span class="skill-pill">Pandas</span>
-                            <span class="skill-pill">EDA</span>
-                            <span class="skill-pill">Data Modeling</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- IBM PYTHON PROJ -->
-                <a href="https://www.coursera.org/account/accomplishments/verify/T17AJO1N04OE" target="_blank" class="cred-link-wrapper">
-                    <div class="cred-card">
-                        <div class="cred-top">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM" class="cred-logo">
-                            <div>
-                                <span class="cred-title">Python Project for Data Science</span>
-                                <div class="cred-org">IBM</div>
-                            </div>
-                        </div>
-                        <div class="cred-skills">
-                            <span class="skill-pill">Dashboards</span>
-                            <span class="skill-pill">Beautiful Soup</span>
-                            <span class="skill-pill">APIs</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- IBM DATA SCIENCE -->
-                <a href="https://www.coursera.org/account/accomplishments/verify/TVP8BOKG7IZC" target="_blank" class="cred-link-wrapper">
-                    <div class="cred-card">
-                        <div class="cred-top">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM" class="cred-logo">
-                            <div>
-                                <span class="cred-title">Python for Data Science & AI</span>
-                                <div class="cred-org">IBM</div>
-                            </div>
-                        </div>
-                        <div class="cred-skills">
-                            <span class="skill-pill">NumPy</span>
-                            <span class="skill-pill">OOP</span>
-                            <span class="skill-pill">Data Structures</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- UC DAVIS SQL -->
-                <a href="https://www.coursera.org/account/accomplishments/verify/UN1HIZA5KEPM" target="_blank" class="cred-link-wrapper">
-                    <div class="cred-card">
-                        <div class="cred-top">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/UC_Davis_Aggies_logo.svg" alt="UC Davis" class="cred-logo">
-                            <div>
-                                <span class="cred-title">SQL for Data Science</span>
-                                <div class="cred-org">UC Davis</div>
-                            </div>
-                        </div>
-                        <div class="cred-skills">
-                            <span class="skill-pill">Advanced SQL</span>
-                            <span class="skill-pill">Relational DBs</span>
-                            <span class="skill-pill">Query Optimization</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- ACADEMIC DEGREE -->
-                <div class="cred-card" style="border-color: var(--accent-gold);">
-                    <div class="cred-top">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Universidad_de_la_Salle_Colombia_logo.svg/1200px-Universidad_de_la_Salle_Colombia_logo.svg.png" alt="La Salle" class="cred-logo" style="filter:none; opacity:1;">
-                        <div>
-                            <span class="cred-title" data-key="edu_degree">Data Science Professional</span>
-                            <div class="cred-org">Universidad de La Salle</div>
-                        </div>
-                    </div>
-                    <div class="cred-skills">
-                        <span class="skill-pill">Advanced Analytics</span>
-                        <span class="skill-pill">Big Data</span>
-                        <span class="skill-pill">Research</span>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- HUMBLE CTA -->
-        <section class="power-cta">
-            <h2 class="cta-title" data-key="cta_title">Is this what you're looking for?</h2>
-            <p class="cta-desc" data-key="cta_desc">
-                If you have a complex data challenge and need someone who has solved it before, let's have a brief conversation.
-            </p>
-            <a href="https://wa.me/3025141055" class="hero-btn" data-key="cta_btn">
-                Contact Me
-            </a>
-        </section>
-
-    </main>
+        </a>
+    </div>
 
     <footer>
-        <div class="footer-links">
-            <a href="mailto:efraingoomez@outlook.com" class="footer-link">Email</a>
-            <a href="https://wa.me/3025141055" class="footer-link">WhatsApp</a>
-            <a href="https://www.linkedin.com/in/efrain-data-science/" target="_blank" class="footer-link">LinkedIn</a>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">LinkedIn</a>
+                <a href="#">GitHub</a>
+                <a href="#">Email</a>
+            </div>
+            <p>&copy; 2026 ELIT Data Systems. All Rights Reserved.</p>
         </div>
-        <p>&copy; 2026 ELIT Data Systems.</p>
     </footer>
 
     <script>
-        // --- TRANSLATIONS (Tone: Calm Competence) ---
         const translations = {
             en: {
-                nav_solutions: "Expertise",
-                nav_xp: "Work",
-                nav_certs: "Authority",
-                hero_title: "Engineering Clarity in <br><span class='highlight-text'>Complex Systems</span>.",
-                hero_sub: "I translate chaotic data into executive strategy. No fluff, just scalable architecture and automated precision.",
-                hero_cta: "View Track Record",
-                services_title: "Core Competencies",
-                services_sub: "Operational Value",
-                card1_title: "Data Engineering",
-                card1_desc: "Designing the backbone. Robust ETL pipelines and scalable Data Lakes that ensure data integrity at the source.",
-                card2_title: "Process Automation",
-                card2_desc: "Eliminating friction. Deploying autonomous agents and NLP models to handle repetitive, high-volume tasks.",
-                card3_title: "Strategic Analytics",
-                card3_desc: "Driving decisions. Predictive modeling and dashboards that answer the \"so what?\" behind the data.",
+                nav_impact: "Impact", nav_svc: "Solutions", nav_exp: "Expertise", nav_contact: "Strategy Call",
+                hero_title: "Engineering Clarity in <br><span class='highlight'>Complex Systems</span>.",
+                hero_sub: "We build the financial and operational architecture that scales high-growth companies from chaotic inputs to executive strategy.",
+                btn_primary: "View Track Record", btn_secondary: "Solutions",
+                met_1: "Portfolio Growth (Openpay)", met_2: "Monthly Billing Managed", met_3: "Global Sales Rank", met_4: "Historical Data Recovered",
+                svc_title: "Operational Architecture", svc_desc: "Bridging the gap between raw Python code and C-Level revenue strategy.",
                 
-                cat_consulting: "Independent Practice & Strategic Projects",
-                cat_corporate: "Corporate Background",
-                
-                job_elit_role: "Founder & Principal Consultant",
-                job_elit_date: "Feb 2025 - Present",
-                job_elit_desc: "Partnering with organizations to architect data systems that scale. Focusing on high-impact, short-term implementation with long-term value.",
-                
-                eng_rr_type: "Strategic Restructuring",
-                eng_rr_li1: "Structured operational data for market entry (US, Saudi Arabia, Colombia).",
-                eng_rr_li2: "Built the 'Customer Journey Engine' to track cross-border value.",
-                loc_global: "Global Expansion",
-                btn_view_cert: "Reference Document",
+                c1_title: "Data Engineering Pipelines", c1_desc: "Robust ETL processes that clean, structure, and transport data from chaos to warehouse.",
+                c2_title: "Revenue Operations (RevOps)", c2_desc: "Aligning your tech stack with your bank account. Optimizing CRM flows to stop revenue leakage.",
+                c3_title: "AI & Process Automation", c3_desc: "Replacing manual drudgery with autonomous agents. NLP analysis for massive datasets.",
+                c4_title: "Strategic Analytics", c4_desc: "Driving decisions. Predictive modeling and dashboards that answer the 'so what?' behind the data.",
+                c4_li1: "Advanced Descriptive Stats", c4_li2: "Predictive Modeling", c4_li3: "Prescriptive Growth Strategy",
 
-                eng_uni_type: "Automation Ecosystem & NLP",
-                eng_uni_li1: "Entrusted with 3 consecutive automation projects to reduce administrative load.",
-                eng_uni_li2: "Analyzed +11k records via NLP to diagnose student retention issues.",
-                loc_3proj: "3 Projects / 1 Year",
-
-                eng_kig_type: "Sales Operations & Modeling",
-                eng_kig_li1: "Developed revenue projection models to support executive decision making.",
-                eng_kig_li3: "Consolidated +1,200 chaotic data files into a unified reporting structure.",
-                kiggu_tag: "Strategic Project",
-                btn_view_contract: "Contract Verification",
-
-                job_tendencys_role: "Business Developer",
-                job_tendencys_desc: "Designed a data-driven strategy that achieved #1 Revenue Rank across 7 countries.",
-                job_openpay_role: "Business Executive",
-                job_openpay_desc: "Managed a high-growth portfolio ($200M to $1.98B COP). Led API integration efforts.",
-                job_redblue_role: "Offline Team Leader",
-                job_redblue_desc: "Optimized commercial strategy for an 8-person team via conversion KPIs.",
-                job_crehana_role: "Sales Dev Rep",
-                job_crehana_desc: "Restructured market segmentation for EdTech LatAm using data qualification.",
+                exp_title: "Professional Timeline", exp_desc: "A track record of solving 'impossible' data clutter and scaling revenue engines.",
                 
-                auth_title: "Certified Authority",
-                edu_degree: "Data Science Professional",
-                cta_title: "Is this what you're looking for?",
-                cta_desc: "If you have a complex data challenge and need someone who has solved it before, let's have a brief conversation.",
-                cta_btn: "Contact Me",
-                verify_cert: "Verify"
+                // ELIT UPDATED
+                elit_intro: "Leading a Data Engineering and AI consultancy, bridging the gap between technical implementation (Python, ETL) and business strategy. Clients trust my ability to transform complex data into operational and financial growth.",
+                proj_1_title: "🔍 KIGGU | Data Archaeology", 
+                proj_1_desc: "Recovered a critical asset of 20 years of 'lost' and disorganized data. Designed Python + AI pipelines for massive cleaning and structuring of +1,200 raw files. Presented predictive models (Scikit-learn) to the C-Suite, grounding strategic decisions on recovered historical evidence.",
+                proj_2_title: "🌎 RED RACCOON ART HOUSE (USA)",
+                proj_2_desc: "Designed the integral Sales, Operations, and Strategy architecture for brand expansion in Orlando, FL. Executed data-driven competitive analysis and built executive dashboards for real-time profitability monitoring.",
+                proj_3_title: "🎓 UNIVERSIDAD DE LA SALLE",
+                proj_3_desc: "Selected to lead 3 consecutive initiatives: NLP Analytics to process +11,000 records and diagnose attrition, Automation of the 'A Rodar Unisalle' ecosystem, and Design of the automated degree management system.",
+
+                tend_txt: "Merged sales execution with Business Intelligence, designing a Data-Driven strategy to maximize resource allocation and optimize the sales cycle.",
+                tend_imp: "Top 5 globally among 94 executives. Achieved all-time sales record through algorithmic lead prioritization.",
+                open_txt: "Acted as the strategic bridge between payments technology and business within BBVA's Fintech division.",
+                open_imp: "Scaled portfolio from $200M to $1.9B COP in 8 months through technical API onboarding.",
+                red_imp: "Designed a scalable demand generation engine producing +70 SQLs monthly.",
+                
+                auth_header: "Certified Authority",
+                bio: "I understand the code AND the money. I build systems that don't just 'work' technically, but drive measurable financial growth.",
+                btn_cv: "Download Full CV",
+                wa_top: "Available Now", wa_main: "Consult Availability"
             },
             es: {
-                nav_solutions: "Experiencia",
-                nav_xp: "Portafolio",
-                nav_certs: "Autoridad",
-                hero_title: "Ingeniería de Claridad en <br><span class='highlight-text'>Sistemas Complejos</span>.",
-                hero_sub: "Traduzco datos caóticos en estrategia ejecutiva. Sin ruido, solo arquitectura escalable y precisión automatizada.",
-                hero_cta: "Ver Trayectoria",
-                services_title: "Competencias Centrales",
-                services_sub: "Valor Operativo",
-                card1_title: "Ingeniería de Datos",
-                card1_desc: "Diseñando la columna vertebral. Pipelines ETL robustos y Data Lakes escalables que aseguran integridad en la fuente.",
-                card2_title: "Automatización de Procesos",
-                card2_desc: "Eliminando fricción. Despliegue de agentes autónomos y modelos NLP para manejar tareas repetitivas de alto volumen.",
-                card3_title: "Analítica Estratégica",
-                card3_desc: "Impulsando decisiones. Modelos predictivos y dashboards que responden el \"¿y qué?\" detrás de los datos.",
+                nav_impact: "Impacto", nav_svc: "Soluciones", nav_exp: "Experiencia", nav_contact: "Agendar Llamada",
+                hero_title: "Ingeniería de Claridad en <br><span class='highlight'>Sistemas Complejos</span>.",
+                hero_sub: "Construimos la arquitectura financiera y operativa que escala empresas de alto crecimiento, desde inputs caóticos hasta estrategia ejecutiva.",
+                btn_primary: "Ver Trayectoria", btn_secondary: "Soluciones",
+                met_1: "Crecimiento de Portafolio", met_2: "Facturación Mensual Gestionada", met_3: "Ranking Global de Ventas", met_4: "Datos Históricos Recuperados",
+                svc_title: "Arquitectura Operativa", svc_desc: "Cerrando la brecha entre el código Python crudo y la estrategia de ingresos de Nivel C.",
                 
-                cat_consulting: "Consultoría Independiente & Proyectos Estratégicos",
-                cat_corporate: "Trayectoria Corporativa",
-                
-                job_elit_role: "Fundador & Consultor Principal",
-                job_elit_date: "Feb 2025 - Actualidad",
-                job_elit_desc: "Me asocio con organizaciones para arquitectar sistemas de datos que escalan. Enfoque en implementación de alto impacto y valor a largo plazo.",
-                
-                eng_rr_type: "Reestructuración Estratégica",
-                eng_rr_li1: "Estructuré datos operativos para entrada a mercado (EE. UU., Arabia Saudita, Colombia).",
-                eng_rr_li2: "Construí el 'Motor de Customer Journey' para rastrear valor transfronterizo.",
-                loc_global: "Expansión Global",
-                btn_view_cert: "Documento de Referencia",
+                c1_title: "Pipelines de Ingeniería de Datos", c1_desc: "Procesos ETL robustos que limpian, estructuran y transportan datos del caos al almacén.",
+                c2_title: "Revenue Operations (RevOps)", c2_desc: "Alineando tu tecnología con tu cuenta bancaria. Optimizando flujos CRM para detener fugas de ingresos.",
+                c3_title: "IA y Automatización", c3_desc: "Reemplazando el trabajo manual con agentes autónomos. Análisis NLP para conjuntos de datos masivos.",
+                c4_title: "Analítica Estratégica", c4_desc: "Impulsando decisiones. Modelos predictivos y dashboards que responden el '¿y qué?' detrás de los datos.",
+                c4_li1: "Estadística Descriptiva Avanzada", c4_li2: "Modelado Predictivo", c4_li3: "Estrategia Prescriptiva de Crecimiento",
 
-                eng_uni_type: "Ecosistema de Automatización & NLP",
-                eng_uni_li1: "A cargo de 3 proyectos consecutivos para reducir carga administrativa.",
-                eng_uni_li2: "Analicé +11k registros vía NLP para diagnosticar retención estudiantil.",
-                loc_3proj: "3 Proyectos / 1 Año",
-
-                eng_kig_type: "Operaciones de Ventas & Modelado",
-                eng_kig_li1: "Desarrollé modelos de proyección de ingresos para soporte a decisiones ejecutivas.",
-                eng_kig_li3: "Consolidé +1,200 archivos de datos caóticos en una estructura unificada.",
-                kiggu_tag: "Proyecto Estratégico",
-                btn_view_contract: "Verificación de Contrato",
-
-                job_tendencys_role: "Desarrollador de Negocios",
-                job_tendencys_desc: "Diseñé una estrategia basada en datos que logró el Rango #1 de Ingresos en 7 países.",
-                job_openpay_role: "Ejecutivo de Negocios",
-                job_openpay_desc: "Gestioné un portafolio de alto crecimiento ($200M a $1.98B COP). Lideré esfuerzos de integración API.",
-                job_redblue_role: "Líder de Equipo Offline",
-                job_redblue_desc: "Optimicé la estrategia comercial para un equipo de 8 personas vía KPIs de conversión.",
-                job_crehana_role: "Representante de Desarrollo",
-                job_crehana_desc: "Reestructuré la segmentación de mercado para EdTech LatAm usando calificación de datos.",
+                exp_title: "Línea de Tiempo Profesional", exp_desc: "Un historial de resolver desorden de datos 'imposible' y escalar motores de ingresos.",
                 
-                auth_title: "Autoridad Certificada",
-                edu_degree: "Profesional en Ciencia de Datos",
-                cta_title: "¿Es esto lo que buscas?",
-                cta_desc: "Si tienes un desafío de datos complejo y necesitas a alguien que ya lo haya resuelto antes, tengamos una breve conversación.",
-                cta_btn: "Contactar",
-                verify_cert: "Verificar"
+                // ELIT UPDATED SPANISH
+                elit_intro: "Liderando consultoría en Ingeniería de Datos e IA, cerrando la brecha entre implementación técnica (Python, ETL) y estrategia de negocio. Clientes confían en mi capacidad para transformar datos complejos en crecimiento operativo y financiero.",
+                proj_1_title: "🔍 KIGGU | Arqueología de Datos", 
+                proj_1_desc: "Recuperación de activos críticos de 20 años de datos 'perdidos' y desorganizados. Diseño de pipelines Python + IA para limpieza masiva y estructuración de +1,200 archivos brutos. Presentación de modelos predictivos (Scikit-learn) al C-Suite, fundamentando decisiones estratégicas en evidencia histórica recuperada.",
+                proj_2_title: "🌎 RED RACCOON ART HOUSE (USA)",
+                proj_2_desc: "Diseño de arquitectura integral de Ventas, Operaciones y Estrategia para expansión de marca en Orlando, FL. Ejecución de análisis competitivo basado en datos y construcción de dashboards ejecutivos para monitoreo de rentabilidad en tiempo real.",
+                proj_3_title: "🎓 UNIVERSIDAD DE LA SALLE",
+                proj_3_desc: "Seleccionado para liderar 3 iniciativas consecutivas: Analítica NLP para procesar +11,000 registros y diagnosticar deserción, Automatización del ecosistema 'A Rodar Unisalle', y Diseño del sistema automatizado de gestión de grados.",
+
+                tend_txt: "Fusión de ejecución de ventas con Business Intelligence, diseñando una estrategia Data-Driven para maximizar la asignación de recursos y optimizar el ciclo de ventas.",
+                tend_imp: "Top 5 global entre 94 ejecutivos. Récord histórico de ventas mediante priorización algorítmica de leads.",
+                open_txt: "Puente estratégico entre tecnología de pagos y negocio dentro de la división Fintech de BBVA.",
+                open_imp: "Escalamiento de portafolio de $200M a $1.9B COP en 8 meses mediante onboarding técnico de APIs.",
+                red_imp: "Diseño de motor escalable de generación de demanda produciendo +70 SQLs mensuales.",
+                
+                auth_header: "Autoridad Certificada",
+                bio: "Entiendo el código Y el dinero. Construyo sistemas que no solo 'funcionan' técnicamente, sino que impulsan crecimiento financiero medible.",
+                btn_cv: "Descargar CV Completo",
+                wa_top: "Disponible Ahora", wa_main: "Consultar Disponibilidad"
             }
         };
 
-        function setLanguage(lang) {
+        function setLang(lang) {
             document.querySelectorAll('[data-key]').forEach(el => {
-                const key = el.getAttribute('data-key');
-                if (translations[lang][key]) {
-                    el.innerHTML = translations[lang][key];
-                }
+                const k = el.getAttribute('data-key');
+                if(translations[lang][k]) el.innerHTML = translations[lang][k];
             });
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            document.querySelector(`.lang-btn[onclick="setLanguage('${lang}')"]`).classList.add('active');
         }
-
-        // --- VISUAL EFFECTS ---
-        document.addEventListener('DOMContentLoaded', () => {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.glass-card, .xp-card, .cred-card, .power-cta, .founder-section').forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(20px)';
-                el.style.transition = 'all 0.8s cubic-bezier(0.23, 1, 0.32, 1)';
-                observer.observe(el);
-            });
-        });
     </script>
 </body>
 </html>
