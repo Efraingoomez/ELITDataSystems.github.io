@@ -79,7 +79,9 @@
         .logo-box { 
             background: var(--primary-dark); color: #fff; width: 40px; height: 40px; 
             display: flex; align-items: center; justify-content: center; border-radius: 8px;
+            overflow: hidden; 
         }
+        .logo-img { width: 100%; height: 100%; object-fit: cover; }
 
         .nav-links { display: flex; gap: 32px; align-items: center; }
         .nav-item { 
@@ -311,7 +313,7 @@
             display: flex; align-items: center; gap: 12px;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            padding: 12px 24px 12px 12px;
+            padding: 12px 24px 12px 20px;
             border-radius: 50px;
             box-shadow: var(--shadow-premium);
             border: 1px solid rgba(255,255,255,0.8);
@@ -335,7 +337,7 @@
             position: relative;
         }
         
-        .wa-icon-svg { width: 24px; height: 24px; fill: white; }
+        .wa-icon-svg { width: 22px; height: 22px; fill: white; }
 
         .wa-status-dot {
             position: absolute; bottom: 2px; right: 2px;
@@ -346,9 +348,9 @@
             animation: pulse 2s infinite;
         }
 
-        .wa-text-group { display: flex; flex-direction: column; }
+        .wa-text-group { display: flex; flex-direction: column; align-items: flex-end; }
         .wa-label-top { font-size: 0.7rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
-        .wa-label-main { font-size: 0.95rem; color: var(--primary-dark); font-weight: 700; font-family: var(--font-sans); }
+        .wa-label-main { font-size: 0.95rem; color: var(--primary-dark); font-weight: 800; font-family: var(--font-sans); }
 
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
@@ -376,8 +378,11 @@
     <nav>
         <div class="container nav-content">
             <div class="logo">
-                <div class="logo-box">E</div>
-                ELIT Data Systems
+                <div class="logo-box">
+                    <!-- LOGO EMPRESA ACTUALIZADO -->
+                    <img src="Background%20Eraser%20(1).jpeg" alt="E Logo" class="logo-img" onerror="this.style.display='none'; this.parentNode.innerHTML='E'">
+                </div>
+                <span style="margin-left: 10px;">ELIT Data Systems</span>
             </div>
             <div class="nav-links">
                 <a href="#expertise" class="nav-item" data-key="nav_exp">Expertise</a>
@@ -578,7 +583,7 @@
         <!-- SIDEBAR: PROFILE & LOGOS (RIGHT) -->
         <div class="profile-sticky">
             <div class="profile-card">
-                <!-- Profile Image -->
+                <!-- FOTO PERFIL ACTUALIZADA -->
                 <img src="FF230941-48C7-4D41-94CB-BBCBFEA69D67.png" alt="Efrain Gomez" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?name=Efrain+Gomez&background=0f172a&color=fff&size=500'">
                 
                 <h3 style="font-size:1.5rem; margin-bottom:8px;">Efrain Gomez</h3>
@@ -591,7 +596,7 @@
                 <a href="CV_Efrain_Gomez_Revenue_Operations_Data_Engineer.pdf" download class="btn-primary" style="width:100%; display:block; padding:12px; font-size:0.9rem;" data-key="btn_cv">Download Full CV</a>
             </div>
 
-            <!-- CERTIFIED AUTHORITY SECTION (EXACT FILENAMES) -->
+            <!-- CERTIFIED AUTHORITY SECTION (EXACT FILENAMES UPDATED) -->
             <div class="certs-container">
                 <div class="certs-title" data-key="auth_header">Certified Authority</div>
                 <div class="logo-grid">
@@ -610,14 +615,14 @@
                         <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg" alt="Meta" class="cert-img">
                         <span class="cert-name">Analytics</span>
                     </div>
-                    <!-- UC Davis (EXACT FILENAME) -->
+                    <!-- UC Davis (UPDATED) -->
                     <div class="cert-logo-box">
                         <img src="uc_davis_logo.jfif" alt="UC Davis" class="cert-img">
                         <span class="cert-name">SQL Specialist</span>
                     </div>
-                    <!-- La Salle (EXACT FILENAME) -->
+                    <!-- La Salle (UPDATED) -->
                     <div class="cert-logo-box" style="grid-column: span 2;">
-                        <img src="image_180ad4.png" alt="Universidad de La Salle" class="cert-img">
+                        <img src="SAlle%20logo.jfif" alt="Universidad de La Salle" class="cert-img">
                         <span class="cert-name">Data Science Degree</span>
                     </div>
                 </div>
@@ -626,16 +631,17 @@
 
     </section>
 
-    <!-- PREMIUM WHATSAPP WIDGET (TEXT PRESERVED) -->
+    <!-- PREMIUM WHATSAPP WIDGET (UPDATED ICON & TEXT) -->
     <div class="wa-premium-widget">
         <a href="https://wa.me/573025141055" target="_blank" class="wa-pill-btn">
             <div class="wa-text-group">
-                <span class="wa-label-top" data-key="wa_top">Available Now</span>
-                <span class="wa-label-main" data-key="wa_main">Consult Availability</span>
+                <span class="wa-label-top" data-key="wa_top">Online Now</span>
+                <span class="wa-label-main" data-key="wa_main">Let's Talk Data Strategy</span>
             </div>
             <div class="wa-icon-circle">
+                <!-- ICONO TELEFONO (Phone Icon) -->
                 <svg class="wa-icon-svg" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z"/>
+                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
                 </svg>
                 <div class="wa-status-dot"></div>
             </div>
@@ -689,7 +695,7 @@
                 auth_header: "Certified Authority",
                 bio: "I understand the code AND the money. I build systems that don't just 'work' technically, but drive measurable financial growth.",
                 btn_cv: "Download Full CV",
-                wa_top: "Available Now", wa_main: "Consult Availability"
+                wa_top: "Online Now", wa_main: "Let's Talk Data Strategy"
             },
             es: {
                 nav_impact: "Impacto", nav_svc: "Soluciones", nav_exp: "Experiencia", nav_contact: "Agendar Llamada",
@@ -725,7 +731,7 @@
                 auth_header: "Autoridad Certificada",
                 bio: "Entiendo el código Y el dinero. Construyo sistemas que no solo 'funcionan' técnicamente, sino que impulsan crecimiento financiero medible.",
                 btn_cv: "Descargar CV Completo",
-                wa_top: "Disponible Ahora", wa_main: "Consultar Disponibilidad"
+                wa_top: "En Línea", wa_main: "Diseñemos tu Estrategia"
             }
         };
 
